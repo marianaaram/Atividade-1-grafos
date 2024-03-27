@@ -10,8 +10,19 @@ public class GrafoMatrizAdj {
         this.numVertices = numVertices;
     }
 
-    //Adiciona aresta
+    //Adiciona aresta nao direcionado
     public void addAresta(int i, int j) {
+        if (i < 0 || j < 0 || i >= numVertices || j >= numVertices) {
+            System.out.println("Vértices inválidos");
+            System.exit(0);
+        } else {
+            matriz[i][j] = 1;
+            matriz[j][i] = 1;
+        }
+    }
+
+    //Adiciona aresta nao direcionado
+    public void addArestaDir(int i, int j) {
         matriz[i][j] = 1;
         matriz[j][i] = 1;
     }
