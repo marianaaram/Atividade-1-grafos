@@ -1,12 +1,14 @@
+
 ## Atividade 1 grafos
 
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/marianaaram)
+ 
+## **Alunos:**
+[![Build Status](https://dabuttonfactory.com/button.png?t=Mariana+Aram&f=Open+Sans-Bold&ts=12&tc=f6b26b&hp=26&vp=12&c=11&bgt=unicolored&bgc=fff2cc&shs=1&shc=ccc&sho=s)](https://github.com/marianaaram) [![Build Status](https://dabuttonfactory.com/button.png?t=Marcos+Victor&f=Open+Sans-Bold&ts=12&tc=f6b26b&hp=26&vp=12&c=11&bgt=unicolored&bgc=fff2cc&shs=1&shc=ccc&sho=s)](https://github.com/marcosVictorM) [![Build Status](https://dabuttonfactory.com/button.png?t=Yago++Garzon&f=Open+Sans-Bold&ts=12&tc=f6b26b&hp=26&vp=12&c=11&bgt=unicolored&bgc=fff2cc&shs=1&shc=ccc&sho=s)](https://github.com/yagogarzon)
 
 Esse projeto é um trabalho da matéria de grafos desenvolvido por alunos do 5º período de engenharia da computação.
 
 ## Objetivo
-Desenvolver um aplicativo para a manipulação de grafos, 
+Desenvolver um aplicativo para a manipulação de grafos.
 
 ## Funcionalidades 
 
@@ -16,14 +18,13 @@ Desenvolver um aplicativo para a manipulação de grafos,
  
 
 #### Manipulação
--  Criação de um grafo com X vértices (o número de vértices deve ser inserido pelo usuário), ✅
-- Definição do tipo de grafo (direcionado ou não direcionado),
-- Criação e remoção de arestas,
-- Identificação da vizinhança de um vértice (grafo não direcionado),
-- Identificação dos sucessores e predecessores de um vértice (grafo direcionado) ,
-- Identificação do grau de um determinado vértice. (Observar direcionamento ou não do grafo),
-- Testar se o grafo é simples,
-- Testar se o grafo é regular,
-- Testar se o grafo é completo,
+-  Criação de um grafo com X vértices (o número de vértices deve ser inserido pelo usuário). ✅
+- Definição do tipo de grafo (direcionado ou não direcionado).
+- Criação e remoção de arestas.
+- Identificação da vizinhança de um vértice (grafo não direcionado).
+- Identificação dos sucessores e predecessores de um vértice (grafo direcionado).
+- Identificação do grau de um determinado vértice. (Observar direcionamento ou não do grafo).
+- Testar se o grafo é simples.
+- - Testar se o grafo é regular.
+- Testar se o grafo é completo.
 - Testar se o grafo é bipartido.
-
