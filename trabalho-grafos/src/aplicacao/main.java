@@ -27,7 +27,8 @@ public class main {
 
 
         switch (EDirecionado) {
-          case 1: //NAO DERECIONADO
+          //NAO DERECIONADO
+          case 1: 
           LimparTela.limpar_console();
           System.out.println("Um grafo com " + numVertices + " vértices foi criado usando Matriz e Lista de Adjacência.\n" );
 
@@ -38,6 +39,15 @@ public class main {
             switch (num) {
 
               case 1:
+                LimparTela.limpar_console();
+                System.out.println("Digite o vértice 1"); 
+                int i = scanner.nextInt();
+
+                System.out.println("Digite o vértice 2"); 
+                int j = scanner.nextInt();
+
+                grafoMatrizAdj.addAresta(i,j);
+                grafoListaAdj.addAresta(i,j);
                 
                 break;
 
@@ -46,11 +56,25 @@ public class main {
                 break;
 
               case 3:
+                LimparTela.limpar_console();
+                System.out.println("Digite o vértice desejado"); 
+                int verticeViznho = scanner.nextInt();
+
+                System.out.println("A vizinhança de "+verticeViznho+ " são: "+grafoListaAdj.vizinhanca(verticeViznho));
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
               
                 break;
 
               case 4:
-              
+                LimparTela.limpar_console();
+                System.out.println("Digite o vértice desejado"); 
+                int verticeGrau = scanner.nextInt();
+
+                System.out.println("\nO grau do vértice "+verticeGrau+" é: "+ grafoListaAdj.grauVertice(verticeGrau));
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+               
                break;
 
               case 5:
@@ -58,13 +82,19 @@ public class main {
                 break;
 
               case 6:
+                LimparTela.limpar_console();
+
+                grafoMatrizAdj.imprimizrMatriz();
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
               
                 break;
 
               case 7:
               
                 break;
-                
+
               default:
         
                 break;
@@ -75,7 +105,9 @@ public class main {
 
           break;
 
-          case 2:// DIRECIONADO 
+
+          //DIRECIONADO 
+          case 2:
           LimparTela.limpar_console();
           System.out.println("Um grafo direcionado com " + numVertices + " vértices foi criado usando Matriz e Lista de Adjacência.\n"); 
           
@@ -85,7 +117,16 @@ public class main {
 
             switch (num) {
               case 1:
-                
+                LimparTela.limpar_console();
+                System.out.println("Digite o vertice de origem"); 
+                int origem = scanner.nextInt();
+
+                System.out.println("Digite o vertice de destino"); 
+                int destino = scanner.nextInt();
+
+                grafoMatrizAdj.addArestaDir(destino, origem);
+                grafoListaAdj.addArestaDirecionada(origem, destino);
+
                 break;
 
               case 2:
@@ -97,6 +138,16 @@ public class main {
                 break;
 
               case 4:
+                LimparTela.limpar_console();
+                System.out.println("Digite o vértice desejado"); 
+                int verticeGrau = scanner.nextInt();
+
+                System.out.println("\nO grau de entrada do vértice "+verticeGrau+" é: "+ grafoListaAdj.grauEntrada(verticeGrau));
+                System.out.println("O grau de saída do vértice "+verticeGrau+" é: "+ grafoListaAdj.grauVertice(verticeGrau));
+                
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+               
                 
                 break;
 
@@ -105,6 +156,12 @@ public class main {
                 break;
 
               case 6:
+                LimparTela.limpar_console();
+
+                grafoMatrizAdj.imprimizrMatriz();
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine();
                 
                 break;
 

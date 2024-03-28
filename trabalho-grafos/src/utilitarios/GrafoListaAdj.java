@@ -17,7 +17,7 @@ public class GrafoListaAdj {
         }
     }
 
-    //Adicionar aresta 
+    //Adicionar aresta nao direcionada
     public void addAresta(int i, int j) {
         if (i > adjListMap.size() || j > adjListMap.size()) {
             return;
@@ -27,6 +27,16 @@ public class GrafoListaAdj {
         List<Integer> destList = adjListMap.get(j);
         destList.add(i);
     }
+
+    //Adicionar aresta direcionada 
+    public void addArestaDirecionada(int origem, int destino) {
+        if (origem > adjListMap.size() || destino > adjListMap.size()) {
+            return;
+        }
+        List<Integer> srcList = adjListMap.get(origem);
+        srcList.add(destino);
+    }
+
 
     //Remover aresta 
     public void removeAresta(int i, int j) {
@@ -61,6 +71,36 @@ public class GrafoListaAdj {
         }
     }
 
+    //Obter a vizinhança de um vértice
+    public List<Integer> vizinhanca(int vertice) {
+        if (!adjListMap.containsKey(vertice)) {
+            return new LinkedList<Integer>(); // Retorna uma lista vazia se o vértice não existir
+        }
+        return adjListMap.get(vertice);
+    }
+
+    //Obter o grau de um vértice nao direcionado
+    public int grauVertice(int vertice) {
+        if (!adjListMap.containsKey(vertice)) {
+            return 0; // Retorna 0 se o vértice não existir
+        }
+        return adjListMap.get(vertice).size(); //Grau de saida
+    }
+
+    //Obter o grau de entrada de um vertice direcionado
+    public int grauEntrada(int vertice) {
+        if (!adjListMap.containsKey(vertice)) {
+            return 0; // Retorna 0 se o vértice não existir
+        }
+        int grauEntrada = 0;
+        for (Map.Entry<Integer, List<Integer>> entry : adjListMap.entrySet()) {
+            List<Integer> vizinhos = entry.getValue();
+            if (vizinhos.contains(vertice)) {
+                grauEntrada++;
+            }
+        }
+        return grauEntrada;
+    }
 
     
 }
