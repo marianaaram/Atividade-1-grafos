@@ -52,6 +52,13 @@ public class main {
                 break;
 
               case 2:
+                LimparTela.limpar_console();
+                System.out.println("Digite os vertices que deseja remover a aresta"); 
+                int remove1 = scanner.nextInt();
+                int remove2 = scanner.nextInt();
+
+                grafoMatrizAdj.removeAresta(remove1, remove2);
+                grafoListaAdj.removeAresta(remove1, remove2);
               
                 break;
 
@@ -92,6 +99,12 @@ public class main {
                 break;
 
               case 7:
+                LimparTela.limpar_console();
+
+                grafoListaAdj.imprimirLista();
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
               
                 break;
 
@@ -130,6 +143,13 @@ public class main {
                 break;
 
               case 2:
+                LimparTela.limpar_console();
+                System.out.println("Digite os vertices que deseja remover a aresta"); 
+                int remove1 = scanner.nextInt();
+                int remove2 = scanner.nextInt();
+
+                grafoMatrizAdj.removeAresta(remove1, remove2);
+                grafoListaAdj.removeAresta(remove1, remove2);
                 
                 break;
 
@@ -166,6 +186,13 @@ public class main {
                 break;
 
               case 7:
+
+                LimparTela.limpar_console();
+
+                grafoListaAdj.imprimirLista();
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
                 
                 break;
           

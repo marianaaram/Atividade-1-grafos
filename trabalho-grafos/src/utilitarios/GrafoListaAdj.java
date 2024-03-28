@@ -41,12 +41,14 @@ public class GrafoListaAdj {
     //Remover aresta 
     public void removeAresta(int i, int j) {
         if (i > adjListMap.size() || j > adjListMap.size()) {
-            return;
+           return;
         }
+
         List<Integer> srcList = adjListMap.get(i);
-        srcList.remove(j);
+        srcList.remove(Integer.valueOf(j)); // Remove o vértice j da lista de adjacência do vértice i
         List<Integer> destList = adjListMap.get(j);
-        destList.remove(i);
+        destList.remove(Integer.valueOf(i)); // Remove o vértice i da lista de adjacência do vértice j
+
     }
 
     //?

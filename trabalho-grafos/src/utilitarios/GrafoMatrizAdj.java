@@ -42,8 +42,19 @@ public class GrafoMatrizAdj {
 
     //Remove aresta 
     public void removeAresta(int i, int j) {
-        matriz[i][j] = 0;
-        matriz[j][i] = 0;
+        i--;
+        j--;
+
+        if(matriz[i][j]==0){
+            System.out.println("Essa aresta não existe\n");
+            System.out.println("\nDe enter para continuar");
+            new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+        }
+        else{
+            matriz[i][j] = 0;
+            matriz[j][i] = 0;
+        }
+        
     }
 
     //?
