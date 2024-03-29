@@ -89,9 +89,9 @@ public class main {
               Testes testes = new Testes(numVertices);
               boolean isSimples = testes.isGrafoSimples();
               if (isSimples) {
-                System.out.println("O grafo é simples.");
+                System.out.println("O grafo é simples, ele não possui laço nem aresta paralela");
               } else {
-                System.out.println("O grafo não é simples.");
+                System.out.println("O grafo não é simples");
               }
               //teste para saber se o grafo é regular (teste com grau)
               boolean isRegular = testes.isGrafoRegular(grafoListaAdj);
@@ -100,6 +100,17 @@ public class main {
                   System.out.println("O grafo é regular, todos os vértices têm o mesmo grau: " + grauReferencia);
               } else {
                   System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
+              }
+              //teste para saber se o grafo é completo(teste com arestas)
+              boolean isCompleto = testes.isGrafoCompleto(grafoListaAdj);
+              if(isSimples = false){
+                System.out.println("O grafo não é completo pois não é simples");
+              }
+              else if(isCompleto){
+                System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
+              } 
+              else {
+                System.out.println("O grafo não é completo.");
               }
               System.out.println("\nDe enter para continuar");
               new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
