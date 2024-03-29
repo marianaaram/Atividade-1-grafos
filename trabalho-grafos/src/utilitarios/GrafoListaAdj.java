@@ -7,10 +7,12 @@ import java.util.Map;
 
 public class GrafoListaAdj {
 
+    private int numVertices;
     private Map<Integer, List<Integer>> adjListMap;
 
     //Construtor 
     public GrafoListaAdj(int vertices) {
+        numVertices = vertices;
         adjListMap = new HashMap<Integer, List<Integer>>();
         for (int i = 1; i <= vertices ; i++) {
             adjListMap.put(i, new LinkedList<Integer>());
@@ -104,5 +106,8 @@ public class GrafoListaAdj {
         return grauEntrada;
     }
 
-    
+    public int getNumVertices() {
+        return numVertices;
+    }
+
 }

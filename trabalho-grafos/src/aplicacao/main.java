@@ -4,7 +4,7 @@ import java.util.Scanner;
 import utilitarios.GrafoListaAdj;
 import utilitarios.GrafoMatrizAdj;
 import utilitarios.LimparTela;
-
+import utilitarios.Testes;
 
 public class main {
     public static void main(String[] args) throws Exception {
@@ -85,8 +85,26 @@ public class main {
                break;
 
               case 5:
-              
-                break;
+              LimparTela.limpar_console();
+              Testes testes = new Testes(numVertices);
+              boolean isSimples = testes.isGrafoSimples();
+              if (isSimples) {
+                System.out.println("O grafo é simples.");
+              } else {
+                System.out.println("O grafo não é simples.");
+              }
+              //teste para saber se o grafo é regular (teste com grau)
+              boolean isRegular = testes.isGrafoRegular(grafoListaAdj);
+              if (isRegular) {
+                  int grauReferencia = grafoListaAdj.grauVertice(1); // Usamos o primeiro vértice como referência
+                  System.out.println("O grafo é regular, todos os vértices têm o mesmo grau: " + grauReferencia);
+              } else {
+                  System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
+              }
+              System.out.println("\nDe enter para continuar");
+              new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+                            
+              break;
 
               case 6:
                 LimparTela.limpar_console();
