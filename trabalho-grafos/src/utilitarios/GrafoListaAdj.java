@@ -1,5 +1,6 @@
 package utilitarios;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -102,6 +103,20 @@ public class GrafoListaAdj {
             }
         }
         return grauEntrada;
+    }
+    //retorna os sucessores
+    public List<Integer> getSucessores(int v) {
+    return new ArrayList<>(adjListMap.get(v));
+        }
+    //retorna os predecessores    
+    public List<Integer> getPredecessores(int v) {
+    List<Integer> predecessores = new ArrayList<>();
+    for (Map.Entry<Integer, List<Integer>> entry : adjListMap.entrySet()) {
+        if (entry.getValue().contains(v)) {
+            predecessores.add(entry.getKey());
+        }
+    }
+    return predecessores;
     }
 
     

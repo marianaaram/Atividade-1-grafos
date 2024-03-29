@@ -1,5 +1,8 @@
 package utilitarios;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GrafoMatrizAdj {
     private int matriz[][];
     private int numVertices;
@@ -71,6 +74,25 @@ public class GrafoMatrizAdj {
             System.out.println();
         }
     }
-
+    //retorna os sucessores
+    public List<Integer> getSucessores(int v) {
+    List<Integer> sucessores = new ArrayList<>();
+    for (int i = 0; i < numVertices; i++) {
+        if (matriz[v][i] == 1) {
+            sucessores.add(i);
+        }
+    }
+    return sucessores;
+    }
+    //retorna os predecessores
+    public List<Integer> getPredecessores(int v) {
+    List<Integer> predecessores = new ArrayList<>();
+    for (int i = 0; i < numVertices; i++) {
+        if (matriz[i][v] == 1) {
+            predecessores.add(i);
+        }
+    }
+    return predecessores;
+}
     
 }
