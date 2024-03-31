@@ -48,7 +48,7 @@ public class GrafoMatrizAdj {
         i--;
         j--;
 
-        if(matriz[i][j]==0){
+        if( i >= numVertices || j >=numVertices ||matriz[i][j]==0){
             System.out.println("Essa aresta não existe\n");
             System.out.println("\nDe enter para continuar");
             new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter

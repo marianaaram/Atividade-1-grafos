@@ -154,6 +154,16 @@ public class main {
                 break;
 
               case 3:
+                LimparTela.limpar_console();
+                System.out.println("Digite o vértice desejado"); 
+                int verticeSP = scanner.nextInt();
+
+                System.out.println("\nOs sucessores do do vértice "+verticeSP+" são: "+ grafoListaAdj.getSucessores(verticeSP));
+                System.out.println("Os predecessores do do vértice "+verticeSP+" são: "+ grafoListaAdj.getPredecessores(verticeSP));
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+               
                 
                 break;
 
