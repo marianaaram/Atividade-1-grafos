@@ -139,6 +139,13 @@ public class GrafoListaAdj {
     return predecessores;
     }
 
+
+
+
+    
+    //TESTES DO GRAFO
+
+    //Grafo simples
     public boolean isGrafoSimples() {
         for (Map.Entry<Integer, List<Integer>> entry : adjListMap.entrySet()) {
             int vertice = entry.getKey();
@@ -163,9 +170,10 @@ public class GrafoListaAdj {
 
     // Método para verificar se o grafo é regular
     public boolean isGrafoRegular() {
-        int grauReferencia = grauVertice(1); // Obtemos o grau do primeiro vértice como referência
-        for (int vertice = 2; vertice <= numVertices; vertice++) {
-            if (grauVertice(vertice) != grauReferencia) {
+        int grauReferencia;
+         grauReferencia = grauVertice(0); // Obtemos o grau do primeiro vértice como referência
+        for (int vertice = 1; vertice <= numVertices; vertice++) {
+            if (grauVertice(vertice) != grauVertice(grauReferencia)) {
                 return false; // Se algum vértice tem um grau diferente, o grafo não é regular
             }
         }
@@ -216,6 +224,8 @@ public class GrafoListaAdj {
         return true;
     }
 
+
+    //GRAFO DIRECIONADO
     // Método para verificar se o grafo direcionado é regular
     public boolean isGrafoRegularDirecionado() {
         int grauSaidaReferencia = grauSaida(1); // Obtemos o grau de saída do primeiro vértice como referência
@@ -274,5 +284,6 @@ public class GrafoListaAdj {
         }
         return true;
     }
+
 
 }

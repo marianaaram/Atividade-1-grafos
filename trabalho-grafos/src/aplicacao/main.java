@@ -85,34 +85,43 @@ public class main {
 
               case 5:
                 LimparTela.limpar_console();
+                int grauReferencia = grafoListaAdj.grauVertice(0); // Usamos o primeiro vértice como referência
+
+                //simples
                 if (grafoListaAdj.isGrafoSimples()) {
                   System.out.println("O grafo é simples, ele não possui laços nem arestas paralelas.");
                 } else {
                   System.out.println("O grafo não é simples.");
                 }
-                if (grafoListaAdj.isGrafoSimples()) {
-                  int grauReferencia = grafoListaAdj.grauVertice(1); // Usamos o primeiro vértice como referência
+
+                //regular
+                if (grafoListaAdj.isGrafoRegular()) {
                   System.out.println("O grafo é regular, todos os vértices têm o mesmo grau: " + grauReferencia);
                 } else {
                   System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
                 }
+
+                //Completo
                 if(grafoListaAdj.isGrafoSimples() == false){
                   System.out.println("O grafo não é completo pois não é simples");
                 }
                 if(grafoListaAdj.isGrafoSimples()){
                   if(grafoListaAdj.isGrafoCompleto()){
                     System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
-                  } 
-                  else if (grafoListaAdj.isGrafoCompleto() == false) {
-                  System.out.println("O grafo não é completo.");
                   }
+                  else{
+                    System.out.println("O grafo não é completo.");
+                  } 
                 }
+
+                //Bipartido
                 if(grafoListaAdj.isGrafoBipartido()){
                   System.out.println("O grafo é bipartido.");
                 }
                 else{
                   System.out.println("O grafo não é bipartido.");
                 }
+
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
                               
@@ -213,11 +222,15 @@ public class main {
 
               case 5:
                 LimparTela.limpar_console();
+
+                //Simples
                 if (grafoListaAdj.isGrafoSimples()) {
                   System.out.println("O grafo é simples, ele não possui laços.");
                 } else {
                   System.out.println("O grafo não é simples.");
                 }
+
+                //Regular
                 if (grafoListaAdj.isGrafoRegularDirecionado()) {
                   int grauReferenciaEntrada = grafoListaAdj.grauEntrada(1);
                   int grauReferenciaSaida = grafoListaAdj.grauSaida(1);
@@ -225,6 +238,8 @@ public class main {
                 } else {
                   System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
                 }
+
+                //Completo
                 if(grafoListaAdj.isGrafoSimples() == false){
                 System.out.println("O grafo não é completo pois não é simples");
                 }
@@ -236,12 +251,15 @@ public class main {
                     System.out.println("O grafo não é completo.");
                   }
                 }
+
+                //Bipartido
                 if(grafoListaAdj.isGrafoBipartidoDirecionado()){
                   System.out.println("O grafo é bipartido.");
                 }
                 else{
                   System.out.println("O grafo não é bipartido.");
                 }
+
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
                 break;
