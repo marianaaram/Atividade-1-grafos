@@ -5,7 +5,6 @@ import utilitarios.GrafoListaAdj;
 import utilitarios.GrafoMatrizAdj;
 import utilitarios.LimparTela;
 
-
 public class main {
     public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -85,7 +84,38 @@ public class main {
                break;
 
               case 5:
-              
+                LimparTela.limpar_console();
+                if (grafoListaAdj.isGrafoSimples()) {
+                  System.out.println("O grafo é simples, ele não possui laços nem arestas paralelas.");
+                } else {
+                  System.out.println("O grafo não é simples.");
+                }
+                if (grafoListaAdj.isGrafoSimples()) {
+                  int grauReferencia = grafoListaAdj.grauVertice(1); // Usamos o primeiro vértice como referência
+                  System.out.println("O grafo é regular, todos os vértices têm o mesmo grau: " + grauReferencia);
+                } else {
+                  System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
+                }
+                if(grafoListaAdj.isGrafoSimples() == false){
+                  System.out.println("O grafo não é completo pois não é simples");
+                }
+                if(grafoListaAdj.isGrafoSimples()){
+                  if(grafoListaAdj.isGrafoCompleto()){
+                    System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
+                  } 
+                  else if (grafoListaAdj.isGrafoCompleto() == false) {
+                  System.out.println("O grafo não é completo.");
+                  }
+                }
+                if(grafoListaAdj.isGrafoBipartido()){
+                  System.out.println("O grafo é bipartido.");
+                }
+                else{
+                  System.out.println("O grafo não é bipartido.");
+                }
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+                              
                 break;
 
               case 6:
@@ -182,7 +212,38 @@ public class main {
                 break;
 
               case 5:
-                
+                LimparTela.limpar_console();
+                if (grafoListaAdj.isGrafoSimples()) {
+                  System.out.println("O grafo é simples, ele não possui laços.");
+                } else {
+                  System.out.println("O grafo não é simples.");
+                }
+                if (grafoListaAdj.isGrafoRegularDirecionado()) {
+                  int grauReferenciaEntrada = grafoListaAdj.grauEntrada(1);
+                  int grauReferenciaSaida = grafoListaAdj.grauSaida(1);
+                  System.out.println("O grafo é regular, todos os vértices têm os mesmos graus: " +grauReferenciaEntrada+ " para grau de entrada e " +grauReferenciaSaida+ " para grau de saída");
+                } else {
+                  System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
+                }
+                if(grafoListaAdj.isGrafoSimples() == false){
+                System.out.println("O grafo não é completo pois não é simples");
+                }
+                if(grafoListaAdj.isGrafoSimples()){
+                  if(grafoListaAdj.isGrafoCompletoDirecionado()){
+                    System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
+                  } 
+                  else if (grafoListaAdj.isGrafoCompletoDirecionado() == false) {
+                    System.out.println("O grafo não é completo.");
+                  }
+                }
+                if(grafoListaAdj.isGrafoBipartidoDirecionado()){
+                  System.out.println("O grafo é bipartido.");
+                }
+                else{
+                  System.out.println("O grafo não é bipartido.");
+                }
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
                 break;
 
               case 6:
