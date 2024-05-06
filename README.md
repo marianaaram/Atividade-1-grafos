@@ -28,3 +28,9 @@ Desenvolver um aplicativo para a manipulação de grafos.
 - Testar se o grafo é regular.✅
 - Testar se o grafo é completo.✅
 - Testar se o grafo é bipartido.✅
+- Busca em largura.
+- Busca em profundidade.
+- Ordenação Topológica.
+- AGM (Prim ou Kruskal).
+- Testar se o grafo é conexo.
+- Identificar o caminho mínimo entre dois vértices.
