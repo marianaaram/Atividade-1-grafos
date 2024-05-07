@@ -23,12 +23,19 @@ public class GrafoMatrizAdj {
             System.out.println("Vértices inválidos");
             return;
         } else {
-            matriz[i][j] = 1;
-            matriz[j][i] = 1;
+            if(i==j){
+                matriz[i][j] = 1; //Laço
+                System.out.println("Aresta criada com sucesso");
+            }
+            else{
+                matriz[i][j] ++;
+                matriz[j][i] ++;
+                System.out.println("Aresta criada com sucesso");
+            }
         }
     }
 
-    //Adiciona aresta nao direcionado
+    //Adiciona aresta direcionado
     public void addArestaDir(int destino, int origem) {
         //Desconsiderar a linha e coluna 0
         destino--;
@@ -38,8 +45,8 @@ public class GrafoMatrizAdj {
             System.out.println("Vértices inválidos");
             return;
         } else {
-            matriz[origem][destino] = -1;
-            matriz[destino][origem] = 1;
+            matriz[origem][destino] ++;
+            System.out.println("Aresta criada com sucesso");
         }
     }
 

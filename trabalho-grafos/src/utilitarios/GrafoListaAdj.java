@@ -1,6 +1,7 @@
 package utilitarios;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -168,7 +169,7 @@ public class GrafoListaAdj {
         return true;
     }
 
-    // Método para verificar se o grafo é regular
+    //Grafo é regular
     public boolean isGrafoRegular() {
         int grauReferencia;
          grauReferencia = grauVertice(0); // Obtemos o grau do primeiro vértice como referência
@@ -180,7 +181,7 @@ public class GrafoListaAdj {
         return true; // Se chegarmos até aqui, todos os vértices têm o mesmo grau
     }
 
-    // Método para verificar se o grafo é completo
+    // Grafo é completo
     public boolean isGrafoCompleto() {
         // Verifica se cada vértice está conectado a todos os outros vértices
         for (int i = 1; i <= numVertices; i++) {
@@ -193,40 +194,44 @@ public class GrafoListaAdj {
         return true; // Se passar por todos os pares de vértices e houver uma aresta entre eles, o grafo é completo
     }
 
-    // Método para verificar se um grafo não direcionado é bipartido
+     
+    // Grafo é bipartido
     public boolean isGrafoBipartido() {
-        // Inicializa o array para armazenar as cores dos vértices
-        int[] cores = new int[numVertices + 1];
-        // Inicializa a fila para o algoritmo BFS
-        Queue<Integer> fila = new LinkedList<>();
+        int cor[] = new int[numVertices + 1];
+        Arrays.fill(cor, -1);
 
-        // Inicializa o primeiro vértice com a cor 1 e o adiciona à fila
-        cores[1] = 1;
+        // Marcar o primeiro vértice com cor 0
+        cor[1] = 0;
+
+        // Criar uma fila (queue) para a busca em largura
+        Queue<Integer> fila = new LinkedList<>();
         fila.add(1);
 
-        // Executa o algoritmo BFS
         while (!fila.isEmpty()) {
-            int vertice = fila.poll();
-            // Percorre os vizinhos do vértice atual
-            for (int vizinho : adjListMap.get(vertice)) {
-                // Se o vizinho não estiver colorido, atribui a cor oposta ao vértice atual
-                if (cores[vizinho] == 0) {
-                    cores[vizinho] = -cores[vertice];
-                    fila.add(vizinho);
+            int u = fila.poll();
+
+            // Encontrar todos os vértices adjacentes de u
+            for (Integer v : adjListMap.get(u)) {
+                // Se o vértice não estiver colorido
+                if (cor[v] == -1) {
+                    // Atribuir uma cor oposta à do vértice atual
+                    cor[v] = 1 - cor[u];
+                    fila.add(v);
                 }
-                // Se o vizinho estiver colorido com a mesma cor do vértice atual, o grafo não é bipartido
-                else if (cores[vizinho] == cores[vertice]) {
+                // Se o vértice adjacente já estiver colorido com a mesma cor do vértice atual,
+                // então o grafo não é bipartido
+                else if (cor[v] == cor[u])
                     return false;
-                }
             }
         }
-        // Se chegarmos até aqui, o grafo é bipartido
+        // Se todas as arestas foram percorridas sem conflitos de cor, o grafo é bipartido
         return true;
+       
     }
 
 
     //GRAFO DIRECIONADO
-    // Método para verificar se o grafo direcionado é regular
+    // Grafo direcionado é regular
     public boolean isGrafoRegularDirecionado() {
         int grauSaidaReferencia = grauSaida(1); // Obtemos o grau de saída do primeiro vértice como referência
         int grauEntradaReferencia = grauEntrada(1); // Obtemos o grau de entrada do primeiro vértice como referência
@@ -235,10 +240,10 @@ public class GrafoListaAdj {
                 return false; // Se algum vértice tem um grau de saída ou de entrada diferente, o grafo não é regular
             }
         }
-        return true; // Se chegarmos até aqui, todos os vértices têm o mesmo grau de saída e de entrada
+        return true; 
     }
 
-    // Método para verificar se o grafo direcionado é completo
+    //Grafo direcionado é completo
     public boolean isGrafoCompletoDirecionado() {
         // Verifica se cada par de vértices distintos possui uma aresta direcionada
         for (int i = 1; i <= numVertices; i++) {
@@ -248,10 +253,10 @@ public class GrafoListaAdj {
                 }
             }
         }
-        return true; // Se passar por todos os pares de vértices e houver uma aresta direcionada de i para j, o grafo é completo
+        return true; 
     }
 
-    // Método para verificar se um grafo direcionado é bipartido
+    // Grafo direcionado é bipartido
     public boolean isGrafoBipartidoDirecionado() {
         // Inicializa o array para armazenar os conjuntos de vértices
         int[] conjuntos = new int[numVertices + 1];

@@ -98,7 +98,7 @@ public class main {
                 if (grafoListaAdj.isGrafoSimples()) {
                   System.out.println("O grafo é simples, ele não possui laços nem arestas paralelas.");
                 } else {
-                  System.out.println("O grafo não é simples.");
+                  System.out.println("O grafo não é simples, ele possui laços ou arestas paralelas.");
                 }
 
                 //regular
@@ -117,7 +117,7 @@ public class main {
                     System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
                   }
                   else{
-                    System.out.println("O grafo não é completo.");
+                    System.out.println("O grafo não é completo, nem todos os vértices se conectam.");
                   } 
                 }
 
@@ -202,6 +202,7 @@ public class main {
           } while (num!=0);
 
           break;
+
 
 
 
