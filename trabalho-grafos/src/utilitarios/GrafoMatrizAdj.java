@@ -21,7 +21,7 @@ public class GrafoMatrizAdj {
 
         if (i < 0 || j < 0 || i >= numVertices || j >=numVertices) {
             System.out.println("Vértices inválidos");
-            System.exit(0);
+            return;
         } else {
             matriz[i][j] = 1;
             matriz[j][i] = 1;
@@ -36,7 +36,7 @@ public class GrafoMatrizAdj {
 
         if (destino < 0 || origem < 0 || destino >= numVertices || origem >= numVertices) {
             System.out.println("Vértices inválidos");
-            System.exit(0);
+            return;
         } else {
             matriz[origem][destino] = -1;
             matriz[destino][origem] = 1;
@@ -59,10 +59,9 @@ public class GrafoMatrizAdj {
         }
         
     }
-
-    //?
+    
     public boolean isAresta(int i, int j) {
-        return matriz[i][j] == 1; //ERRO
+        return matriz[i][j] == 1; 
     }
 
     // Mostra a representação da matriz 

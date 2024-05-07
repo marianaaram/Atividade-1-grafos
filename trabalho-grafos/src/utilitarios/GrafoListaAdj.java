@@ -9,8 +9,8 @@ import java.util.Queue;
 
 public class GrafoListaAdj {
 
-    private int numVertices;
-    private Map<Integer, List<Integer>> adjListMap;
+    private static int numVertices;
+    public static Map<Integer, List<Integer>> adjListMap;
 
     //Construtor 
     public GrafoListaAdj(int vertices) {
@@ -284,6 +284,46 @@ public class GrafoListaAdj {
         }
         return true;
     }
+
+
+
+
+    //Metdo para Busca em Largura 
+    public static void bfs(int vertice1) {
+
+        //Caso o usuario digite um vertice que não está no grafo 
+        if (vertice1 < 1 || vertice1 > numVertices) {
+            System.out.println("\nVértice inválido.");
+            return; // Retorna imediatamente se o vértice for inválido
+        }
+        
+        // Inicializa um array para controlar os vértices visitados
+        boolean[] visited = new boolean[numVertices + 1];
+
+        // Inicializa uma fila para a busca em largura
+        Queue<Integer> queue = new LinkedList<>();
+
+        // Marca o vértice inicial como visitado e o adiciona à fila
+        visited[vertice1] = true;
+        queue.add(vertice1);
+
+        // Itera enquanto a fila não estiver vazia
+        while (!queue.isEmpty()) {
+            // Remove um vértice da fila e imprime seu valor
+            int currentVertex = queue.poll();
+            System.out.print(currentVertex + " ");
+
+            // Percorre todos os vizinhos do vértice atual
+            for (int neighbor : adjListMap.get(currentVertex)) {
+                // Se o vizinho não foi visitado, marca-o como visitado e o adiciona à fila
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.add(neighbor);
+                }
+            }
+        }
+    }
+
 
 
 }

@@ -1,9 +1,11 @@
 package aplicacao;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import utilitarios.GrafoListaAdj;
 import utilitarios.GrafoMatrizAdj;
 import utilitarios.LimparTela;
+
 
 public class main {
     public static void main(String[] args) throws Exception {
@@ -18,6 +20,7 @@ public class main {
         // Criação de um grafo por Matriz e lista de Adjacência
         GrafoMatrizAdj grafoMatrizAdj = new GrafoMatrizAdj(numVertices);
         GrafoListaAdj grafoListaAdj = new GrafoListaAdj(numVertices);
+        
 
         //Definição de tipo
         System.out.println("\nDigite 1 para criar um garfo nao direcionado\nDigite 2 para criar um garfo direcionado");
@@ -32,7 +35,7 @@ public class main {
           System.out.println("Um grafo com " + numVertices + " vértices foi criado usando Matriz e Lista de Adjacência.\n" );
 
           do{
-            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR A VIZINHANÇA DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 0 para SAIR " );
+            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR A VIZINHANÇA DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 8 para BUSCA EM LARGURA\nDigite 9 para BUSCA EM PROFUNDIDADE\nDigite 10 para ORDENAÇÃO TOPOLÓGICA\nDigite 11 para ÁRVORE GERADORA MÍNIMA\nDigite 12 para TESTAR SE O GRAFO É CONEXO\nDigite 13 para identificar o CAMINHO MÍNIMO DE DOIS VÉRTICES\n\nDigite 0 para SAIR " );
             num = scanner.nextInt();
 
             switch (num) {
@@ -47,6 +50,10 @@ public class main {
 
                 grafoMatrizAdj.addAresta(i,j);
                 grafoListaAdj.addAresta(i,j);
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+               
                 
                 break;
 
@@ -58,7 +65,7 @@ public class main {
 
                 grafoMatrizAdj.removeAresta(remove1, remove2);
                 grafoListaAdj.removeAresta(remove1, remove2);
-              
+               
                 break;
 
               case 3:
@@ -124,7 +131,7 @@ public class main {
 
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
-                              
+                      
                 break;
 
               case 6:
@@ -147,6 +154,46 @@ public class main {
               
                 break;
 
+              case 8:
+                LimparTela.limpar_console();
+                
+                // Defina o ponto de partida para a busca em largura
+                System.out.println("\nQual dos vértice será o ponto de partida da busca?");
+                int vertice1 = scanner.nextInt();
+
+                grafoListaAdj.bfs(vertice1);
+          
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+                
+                break;
+
+              case 9:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 10:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 11:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 12:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 13:
+                LimparTela.limpar_console();
+
+                break;
+
+
               default:
         
                 break;
@@ -154,8 +201,8 @@ public class main {
            LimparTela.limpar_console();
           } while (num!=0);
 
-
           break;
+
 
 
           //DIRECIONADO 
@@ -164,7 +211,7 @@ public class main {
           System.out.println("Um grafo direcionado com " + numVertices + " vértices foi criado usando Matriz e Lista de Adjacência.\n"); 
           
           do{
-            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR OS SUCESSORES E PREDECESSORRES DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 0 para SAIR" );
+            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR OS SUCESSORES E PREDECESSORRES DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 8 para BUSCA EM LARGURA\nDigite 9 para BUSCA EM PROFUNDIDADE\nDigite 10 para ORDENAÇÃO TOPOLÓGICA\nDigite 11 para ÁRVORE GERADORA MÍNIMA\nDigite 12 para TESTAR SE O GRAFO É CONEXO\nDigite 13 para identificar o CAMINHO MÍNIMO DE DOIS VÉRTICES\n\nDigite 0 para SAIR" );
             num = scanner.nextInt();
 
             switch (num) {
@@ -178,6 +225,10 @@ public class main {
 
                 grafoMatrizAdj.addArestaDir(destino, origem);
                 grafoListaAdj.addArestaDirecionada(origem, destino);
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+               
 
                 break;
 
@@ -283,6 +334,45 @@ public class main {
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
                 
+                break;
+
+              case 8:
+                LimparTela.limpar_console();
+
+                // Defina o ponto de partida para a busca em largura
+                System.out.println("\nQual dos vértice será o ponto de partida da busca?");
+                int vertice1 = scanner.nextInt();
+                
+                grafoListaAdj.bfs(vertice1);
+          
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+
+                break;
+
+              case 9:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 10:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 11:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 12:
+                LimparTela.limpar_console();
+
+                break;
+
+              case 13:
+                LimparTela.limpar_console();
+
                 break;
           
               default:
