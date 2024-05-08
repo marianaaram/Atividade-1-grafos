@@ -12,6 +12,7 @@ public class GrafoListaAdj {
 
     private static int numVertices;
     public static Map<Integer, List<Integer>> adjListMap;
+    private int[] color = new int[1000];
 
     //Construtor 
     public GrafoListaAdj(int vertices) {
@@ -196,38 +197,58 @@ public class GrafoListaAdj {
 
      
     // Grafo é bipartido
-    public boolean isGrafoBipartido() {
-        int cor[] = new int[numVertices + 1];
-        Arrays.fill(cor, -1);
-
-        // Marcar o primeiro vértice com cor 0
-        cor[1] = 0;
-
-        // Criar uma fila (queue) para a busca em largura
-        Queue<Integer> fila = new LinkedList<>();
-        fila.add(1);
-
-        while (!fila.isEmpty()) {
-            int u = fila.poll();
-
-            // Encontrar todos os vértices adjacentes de u
-            for (Integer v : adjListMap.get(u)) {
-                // Se o vértice não estiver colorido
-                if (cor[v] == -1) {
-                    // Atribuir uma cor oposta à do vértice atual
-                    cor[v] = 1 - cor[u];
-                    fila.add(v);
-                }
-                // Se o vértice adjacente já estiver colorido com a mesma cor do vértice atual,
-                // então o grafo não é bipartido
-                else if (cor[v] == cor[u])
+    public boolean Ebipartido(){ 
+        // Inicializa o array de cores com valores padrão
+        Arrays.fill(color, -1);
+    
+        // Itera sobre todos os vértices do grafo
+        for (int i = 1; i <= numVertices; i++) {
+            // Verifica se o vértice i ainda não foi visitado
+            if (color[i] == -1) {
+                // Inicia a coloração do componente conectado
+                if (!bipartidoUtil(i)) {
+                    // Se encontrar um componente não bipartido, retorna false
                     return false;
+                }
             }
         }
-        // Se todas as arestas foram percorridas sem conflitos de cor, o grafo é bipartido
+        // Se nenhum componente não bipartido foi encontrado, retorna true
         return true;
-       
     }
+    // Função utilitária para colorir os vértices e verificar se o grafo é bipartido
+    private boolean bipartidoUtil(int src) {
+        // Inicializa uma fila para realizar a busca em largura
+        Queue<Integer> fila = new LinkedList<>();
+        // Adiciona o vértice inicial na fila
+        fila.add(src);
+        // Atribui a cor 1 ao vértice inicial
+        color[src] = 1;
+    
+        // Enquanto a fila não estiver vazia
+        while (!fila.isEmpty()) {
+            // Remove o primeiro vértice da fila
+            int u = fila.poll();
+            // Itera sobre todos os vértices adjacentes a u
+            for (int v : adjListMap.get(u)) {
+                // Verifica se o vértice v não foi visitado
+                if (color[v] == -1) {
+                    // Atribui a cor oposta ao vértice adjacente v
+                    color[v] = 1 - color[u];
+                    // Adiciona o vértice v na fila
+                    fila.add(v);
+                } else if (color[v] == color[u]) {
+                    // Se o vértice adjacente v tiver a mesma cor que u, o grafo não é bipartido
+                    return false;
+                }
+            }
+        }
+        // Se nenhum conflito foi encontrado, o grafo é bipartido
+        return true;
+    }
+        
+
+
+
 
 
     //GRAFO DIRECIONADO
@@ -303,32 +324,32 @@ public class GrafoListaAdj {
         }
         
         // Inicializa um array para controlar os vértices visitados
-        boolean[] visited = new boolean[numVertices + 1];
+        boolean[] visitados = new boolean[numVertices + 1];
 
         // Inicializa uma fila para a busca em largura
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Integer> fila = new LinkedList<>();
 
         // Marca o vértice inicial como visitado e o adiciona à fila
-        visited[vertice1] = true;
-        queue.add(vertice1);
+        visitados[vertice1] = true;
+        fila.add(vertice1);
 
         // Itera enquanto a fila não estiver vazia
-        while (!queue.isEmpty()) {
+        while (!fila.isEmpty()) {
             // Remove um vértice da fila e imprime seu valor
-            int currentVertex = queue.poll();
+            int currentVertex = fila.poll();
             System.out.print(currentVertex + " ");
 
             // Percorre todos os vizinhos do vértice atual
-            for (int neighbor : adjListMap.get(currentVertex)) {
+            for (int vizinho : adjListMap.get(currentVertex)) {
                 // Se o vizinho não foi visitado, marca-o como visitado e o adiciona à fila
-                if (!visited[neighbor]) {
-                    visited[neighbor] = true;
-                    queue.add(neighbor);
+                if (!visitados[vizinho]) {
+                    visitados[vizinho] = true;
+                    fila.add(vizinho);
                 }
             }
         }
+
     }
 
-
-
+     
 }

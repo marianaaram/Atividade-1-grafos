@@ -96,37 +96,37 @@ public class main {
 
                 //simples
                 if (grafoListaAdj.isGrafoSimples()) {
-                  System.out.println("O grafo é simples, ele não possui laços nem arestas paralelas.");
+                  System.out.println("° O grafo é simples, ele não possui laços nem arestas paralelas.");
                 } else {
-                  System.out.println("O grafo não é simples, ele possui laços ou arestas paralelas.");
+                  System.out.println("° O grafo não é simples, ele possui laços ou arestas paralelas.");
                 }
 
                 //regular
                 if (grafoListaAdj.isGrafoRegular()) {
-                  System.out.println("O grafo é regular, todos os vértices têm o mesmo grau: " + grauReferencia);
+                  System.out.println("° O grafo é regular, todos os vértices têm o mesmo grau: " + grauReferencia);
                 } else {
-                  System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
+                  System.out.println("° O grafo não é regular, seus vértices têm graus diferentes.");
                 }
 
                 //Completo
                 if(grafoListaAdj.isGrafoSimples() == false){
-                  System.out.println("O grafo não é completo pois não é simples");
+                  System.out.println("° O grafo não é completo pois não é simples");
                 }
                 if(grafoListaAdj.isGrafoSimples()){
                   if(grafoListaAdj.isGrafoCompleto()){
-                    System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
+                    System.out.println("° O grafo é completo, todos os vertices conectam com todos os outros.");
                   }
                   else{
-                    System.out.println("O grafo não é completo, nem todos os vértices se conectam.");
+                    System.out.println("° O grafo não é completo, nem todos os vértices se conectam.");
                   } 
                 }
 
                 //Bipartido
-                if(grafoListaAdj.isGrafoBipartido()){
-                  System.out.println("O grafo é bipartido.");
+                if(grafoListaAdj.Ebipartido()==true){
+                  System.out.println("° O grafo é bipartido.");
                 }
                 else{
-                  System.out.println("O grafo não é bipartido.");
+                  System.out.println("° O grafo não é bipartido.");
                 }
 
                 System.out.println("\nDe enter para continuar");
@@ -286,30 +286,30 @@ public class main {
                 if (grafoListaAdj.isGrafoRegularDirecionado()) {
                   int grauReferenciaEntrada = grafoListaAdj.grauEntrada(1);
                   int grauReferenciaSaida = grafoListaAdj.grauSaida(1);
-                  System.out.println("O grafo é regular, todos os vértices têm os mesmos graus: " +grauReferenciaEntrada+ " para grau de entrada e " +grauReferenciaSaida+ " para grau de saída");
+                  System.out.println("° O grafo é regular, todos os vértices têm os mesmos graus: " +grauReferenciaEntrada+ " para grau de entrada e " +grauReferenciaSaida+ " para grau de saída");
                 } else {
-                  System.out.println("O grafo não é regular, seus vértices têm graus diferentes.");
+                  System.out.println("° O grafo não é regular, seus vértices têm graus diferentes.");
                 }
 
                 //Completo
                 if(grafoListaAdj.isGrafoSimples() == false){
-                System.out.println("O grafo não é completo pois não é simples");
+                System.out.println("° O grafo não é completo pois não é simples");
                 }
                 if(grafoListaAdj.isGrafoSimples()){
                   if(grafoListaAdj.isGrafoCompletoDirecionado()){
-                    System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
+                    System.out.println("° O grafo é completo, todos os vertices conectam com todos os outros.");
                   } 
                   else if (grafoListaAdj.isGrafoCompletoDirecionado() == false) {
-                    System.out.println("O grafo não é completo.");
+                    System.out.println("° O grafo não é completo pois nem todos os vértices se conectam");
                   }
                 }
 
                 //Bipartido
                 if(grafoListaAdj.isGrafoBipartidoDirecionado()){
-                  System.out.println("O grafo é bipartido.");
+                  System.out.println("° O grafo é bipartido.");
                 }
                 else{
-                  System.out.println("O grafo não é bipartido.");
+                  System.out.println("° O grafo não é bipartido.");
                 }
 
                 System.out.println("\nDe enter para continuar");
