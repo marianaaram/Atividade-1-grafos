@@ -158,10 +158,10 @@ public class main {
                 LimparTela.limpar_console();
                 
                 // Defina o ponto de partida para a busca em largura
-                System.out.println("\nQual dos vértice será o ponto de partida da busca?");
-                int vertice1 = scanner.nextInt();
+                System.out.println("\nQual dos vértice será o ponto de partida da busca em largura?");
+                int vertice_inicial_1 = scanner.nextInt();
 
-                grafoListaAdj.bfs(vertice1);
+                grafoListaAdj.bfs(vertice_inicial_1);
           
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
@@ -170,6 +170,15 @@ public class main {
 
               case 9:
                 LimparTela.limpar_console();
+
+                // Defina o ponto de partida para a busca em profundidade
+                System.out.println("\nQual dos vértice será o ponto de partida da busca em profundidade?");
+                int vertice_inicial_2 = scanner.nextInt();
+
+                grafoListaAdj.dfs(vertice_inicial_2);
+          
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
 
                 break;
 
@@ -341,7 +350,7 @@ public class main {
                 LimparTela.limpar_console();
 
                 // Defina o ponto de partida para a busca em largura
-                System.out.println("\nQual dos vértice será o ponto de partida da busca?");
+                System.out.println("\nQual dos vértice será o ponto de partida da busca em largura?");
                 int vertice1 = scanner.nextInt();
                 
                 grafoListaAdj.bfs(vertice1);
@@ -353,6 +362,16 @@ public class main {
 
               case 9:
                 LimparTela.limpar_console();
+
+                // Defina o ponto de partida para a busca em profundidade
+                System.out.println("\nQual dos vértice será o ponto de partida da busca em profundidade?");
+                int vertice_inicial_2 = scanner.nextInt();
+
+                grafoListaAdj.dfs(vertice_inicial_2);
+          
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+
 
                 break;
 

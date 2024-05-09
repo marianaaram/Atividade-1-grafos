@@ -337,14 +337,15 @@ public class GrafoListaAdj {
         visitados[vertice1] = true;
         fila.add(vertice1);
 
-        // Itera enquanto a fila não estiver vazia
+        // Enquanto a fila não estiver vazia
+        System.out.print("\nA ordem da busca é: [ ");
         while (!fila.isEmpty()) {
-            // Remove um vértice da fila e imprime seu valor
-            int currentVertex = fila.poll();
-            System.out.print(currentVertex + " ");
+            // Remove o vértice da fila e imprime seu valor
+            int vertice_atual = fila.poll();
+            System.out.print(vertice_atual + " ");
 
             // Percorre todos os vizinhos do vértice atual
-            for (int vizinho : adjListMap.get(currentVertex)) {
+            for (int vizinho : adjListMap.get(vertice_atual)) {
                 // Se o vizinho não foi visitado, marca-o como visitado e o adiciona à fila
                 if (!visitados[vizinho]) {
                     visitados[vizinho] = true;
@@ -352,27 +353,16 @@ public class GrafoListaAdj {
                 }
             }
         }
-
+        System.out.print("]");
     }
-    /* largura
-     public void dfs(int vertice) {
-        visited[vertice] = true;
-        System.out.print(vertice + " ");
-
-        List<Integer> vizinhos = adjListMap.get(vertice);
-        for (Integer vizinho : vizinhos) {
-            if (!visited[vizinho]) {
-                dfs(vizinho);
-            }
-        }
-    }
-     */
-
+    
 
     //Busca em prufudidade 
-    public void DeflaterInputStream(int vertice1) {
+    public void dfs(int vertice1) {
         boolean[] visitados = new boolean[numVertices + 1];
+        System.out.print("\nA ordem da busca é: [ ");
         dfsUtil(vertice1, visitados);
+        System.out.print("]");
     }
 
     private static void dfsUtil(int vertice, boolean[] visitados) {
