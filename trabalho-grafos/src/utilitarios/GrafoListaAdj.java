@@ -216,7 +216,7 @@ public class GrafoListaAdj {
         return true;
     }
     // Função utilitária para colorir os vértices e verificar se o grafo é bipartido
-    private boolean bipartidoUtil(int src) {
+    private boolean bipartidoUtil(int src) {  
         // Inicializa uma fila para realizar a busca em largura
         Queue<Integer> fila = new LinkedList<>();
         // Adiciona o vértice inicial na fila
@@ -314,6 +314,10 @@ public class GrafoListaAdj {
 
 
 
+
+
+    //BUSCAS 
+
     //Metdo para Busca em Largura 
     public static void bfs(int vertice1) {
 
@@ -350,6 +354,44 @@ public class GrafoListaAdj {
         }
 
     }
+    /* largura
+     public void dfs(int vertice) {
+        visited[vertice] = true;
+        System.out.print(vertice + " ");
+
+        List<Integer> vizinhos = adjListMap.get(vertice);
+        for (Integer vizinho : vizinhos) {
+            if (!visited[vizinho]) {
+                dfs(vizinho);
+            }
+        }
+    }
+     */
+
+
+    //Busca em prufudidade 
+    public void DeflaterInputStream(int vertice1) {
+        boolean[] visitados = new boolean[numVertices + 1];
+        dfsUtil(vertice1, visitados);
+    }
+
+    private static void dfsUtil(int vertice, boolean[] visitados) {
+        // Marca o vértice atual como visitado e imprime
+        visitados[vertice] = true;
+        System.out.print(vertice + " ");
+
+        // Itera sobre os vizinhos do vértice atual
+        for (int vizinho : adjListMap.get(vertice)) {
+            // Se o vizinho não foi visitado, chama recursivamente a função para ele
+            if (!visitados[vizinho]) {
+                dfsUtil(vizinho, visitados);
+            }
+        }
+    }
+
+     
+ 
+
 
      
 }
