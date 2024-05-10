@@ -35,7 +35,7 @@ public class main {
           System.out.println("Um grafo com " + numVertices + " vértices foi criado usando Matriz e Lista de Adjacência.\n" );
 
           do{
-            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR A VIZINHANÇA DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 8 para BUSCA EM LARGURA\nDigite 9 para BUSCA EM PROFUNDIDADE\nDigite 10 para ORDENAÇÃO TOPOLÓGICA\nDigite 11 para ÁRVORE GERADORA MÍNIMA\nDigite 12 para TESTAR SE O GRAFO É CONEXO\nDigite 13 para identificar o CAMINHO MÍNIMO DE DOIS VÉRTICES\n\nDigite 0 para SAIR " );
+            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR A VIZINHANÇA DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 8 para BUSCA EM LARGURA\nDigite 9 para BUSCA EM PROFUNDIDADE\nDigite 10 para ÁRVORE GERADORA MÍNIMA\nDigite 11 para TESTAR SE O GRAFO É CONEXO\nDigite 12 para identificar o CAMINHO MÍNIMO DE DOIS VÉRTICES\n\nDigite 0 para SAIR " );
             num = scanner.nextInt();
 
             switch (num) {
@@ -197,11 +197,6 @@ public class main {
 
                 break;
 
-              case 13:
-                LimparTela.limpar_console();
-
-                break;
-
 
               default:
         
@@ -221,7 +216,7 @@ public class main {
           System.out.println("Um grafo direcionado com " + numVertices + " vértices foi criado usando Matriz e Lista de Adjacência.\n"); 
           
           do{
-            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR OS SUCESSORES E PREDECESSORRES DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 8 para BUSCA EM LARGURA\nDigite 9 para BUSCA EM PROFUNDIDADE\nDigite 10 para ORDENAÇÃO TOPOLÓGICA\nDigite 11 para ÁRVORE GERADORA MÍNIMA\nDigite 12 para TESTAR SE O GRAFO É CONEXO\nDigite 13 para identificar o CAMINHO MÍNIMO DE DOIS VÉRTICES\n\nDigite 0 para SAIR" );
+            System.out.println("\nDigite 1 para CRIAR ARESTAS\nDigite 2 para REMOVER ARESTAS\nDigite 3 para IDENTIFICAR OS SUCESSORES E PREDECESSORRES DE UM VÉRTICE\nDigite 4 para IDENTIFICAR O GRAU DE UM VÉRTICE\nDigite 5 para TESTAR O GRAFO\nDigite 6 para REPRESENTAÇÃO EM MATRIZ\nDigite 7 para REPRESENTAÇÃO EM LISTA\nDigite 8 para BUSCA EM LARGURA\nDigite 9 para BUSCA EM PROFUNDIDADE\nDigite 10 para ORDENAÇÃO TOPOLÓGICA\nDigite 11 para TESTAR SE O GRAFO É CONEXO\nDigite 12 para identificar o CAMINHO MÍNIMO DE DOIS VÉRTICES\n\nDigite 0 para SAIR" );
             num = scanner.nextInt();
 
             switch (num) {
@@ -386,11 +381,6 @@ public class main {
                 break;
 
               case 12:
-                LimparTela.limpar_console();
-
-                break;
-
-              case 13:
                 LimparTela.limpar_console();
 
                 break;
