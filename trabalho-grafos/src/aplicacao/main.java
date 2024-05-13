@@ -1,6 +1,7 @@
 package aplicacao;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 import utilitarios.GrafoListaAdj;
 import utilitarios.GrafoMatrizAdj;
@@ -190,13 +191,37 @@ public class main {
               case 11:
                 LimparTela.limpar_console();
 
+                if(grafoListaAdj.isGrafoConexoNaoDirecionado()){
+                  System.out.println("O grafo é conexo.");
+                } else {
+                  System.out.println("O grafo não é conexo.");
+                }
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+
                 break;
 
               case 12:
                 LimparTela.limpar_console();
 
-                break;
+                System.out.print("Digite o vértice de origem: ");
+                int origem = scanner.nextInt();
+                System.out.print("Digite o vértice de destino: ");
+                int destino = scanner.nextInt();
 
+                List<Integer> caminhoMinimo = grafoListaAdj.dijkstra(origem, destino);
+
+                if (!caminhoMinimo.isEmpty()) {
+                    System.out.println("Caminho mínimo entre " + origem + " e " + destino + ": " + caminhoMinimo);
+                } else {
+                    System.out.println("Não há caminho mínimo entre os vértices " + origem + " e " + destino + ".");
+                }
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+
+                break;
 
               default:
         
@@ -378,13 +403,39 @@ public class main {
               case 11:
                 LimparTela.limpar_console();
 
+                if(grafoListaAdj.isGrafoConexoDirecionado()){
+                  System.out.println("° O grafo é conexo.");
+                } else {
+                  System.out.println("° O grafo não é conexo.");
+                }
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+
                 break;
 
               case 12:
-                LimparTela.limpar_console();
+
+              LimparTela.limpar_console();
+
+                System.out.print("Digite o vértice de origem: ");
+                int origem_dir = scanner.nextInt();
+                System.out.print("Digite o vértice de destino: ");
+                int destino_dir = scanner.nextInt();
+
+                List<Integer> caminhoMinimo = grafoListaAdj.dijkstra(origem_dir, destino_dir);
+
+                if (!caminhoMinimo.isEmpty()) {
+                    System.out.println("Caminho mínimo entre " + origem_dir + " e " + destino_dir + ": " + caminhoMinimo);
+                } else {
+                    System.out.println("Não há caminho mínimo entre os vértices " + origem_dir + " e " + destino_dir + ".");
+                }
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
 
                 break;
-          
+              
               default:
         
                 break;

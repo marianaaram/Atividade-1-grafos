@@ -2,10 +2,13 @@ package utilitarios;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class GrafoListaAdj {
@@ -379,9 +382,117 @@ public class GrafoListaAdj {
         }
     }
 
-     
- 
+    public boolean isGrafoConexoNaoDirecionado() {
 
+        if (numVertices <= 0) {
+            return false;
+        }
+    
+        boolean[] visitados = new boolean[numVertices + 1];
+    
+        bfs(1, visitados);
+    
+        for (int i = 1; i <= numVertices; i++) {
+            if (!visitados[i]) {
+                return false; 
+            }
+        }
+        return true;
+    }
+    
+    private void bfs(int vertice, boolean[] visitados) {
 
+        Queue<Integer> fila = new LinkedList<>();
+
+        fila.add(vertice);
+
+        visitados[vertice] = true;
+
+        while (!fila.isEmpty()) {
+            int verticeAtual = fila.poll();
+            for (int vizinho : adjListMap.get(verticeAtual)) {
+                if (!visitados[vizinho]) {
+                    visitados[vizinho] = true;
+                    fila.add(vizinho);
+                }
+            }
+        }
+    }
+
+    public boolean isGrafoConexoDirecionado() {
+
+        if (numVertices <= 0) {
+            return false;
+        }
+    
+        boolean[] visitados = new boolean[numVertices + 1];
+    
+        dfs(1, visitados);
+    
+        for (int i = 1; i <= numVertices; i++) {
+            if (!visitados[i]) {
+                return false; 
+            }
+        }
+        return true;
+    }
+    
+    private void dfs(int vertice, boolean[] visitados) {
+        visitados[vertice] = true;
+        for (int vizinho : adjListMap.get(vertice)) {
+            if (!visitados[vizinho]) {
+                dfs(vizinho, visitados);
+            }
+        }
+    }
+
+    public List<Integer> dijkstra(int origem, int destino) {
+
+        Map<Integer, Integer> custos = new HashMap<>();
+        
+        Map<Integer, Integer> predecessores = new HashMap<>();
+
+        PriorityQueue<int[]> filaPrioridade = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+
+        for (int i = 1; i <= numVertices; i++) {
+            custos.put(i, Integer.MAX_VALUE);
+        }
+        custos.put(origem, 0);
+
+        filaPrioridade.add(new int[]{origem, 0});
+
+        while (!filaPrioridade.isEmpty()) {
+            int[] verticeAtual = filaPrioridade.poll();
+            int vertice = verticeAtual[0];
+            int custoAtual = verticeAtual[1];
+
+            if (custoAtual > custos.get(vertice)) {
+                continue;
+            }
+
+            for (int vizinho : adjListMap.get(vertice)) {
+                int novoCusto = custoAtual + 1; 
+                
+                if (novoCusto < custos.get(vizinho)) {
+                    custos.put(vizinho, novoCusto);
+                    predecessores.put(vizinho, vertice);
+                    filaPrioridade.add(new int[]{vizinho, novoCusto});
+                }
+            }
+        }
+
+        List<Integer> caminho = new ArrayList<>();
+        int vertice = destino;
+        while (predecessores.containsKey(vertice)) {
+            caminho.add(0, vertice);
+            vertice = predecessores.get(vertice);
+        }
+        if (vertice == origem) {
+            caminho.add(0, vertice);
+            return caminho;
+        } else {
+            return Collections.emptyList();
+        }
+    }
      
 }
