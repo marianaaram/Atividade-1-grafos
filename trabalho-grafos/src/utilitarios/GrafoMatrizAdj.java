@@ -57,12 +57,11 @@ public class GrafoMatrizAdj {
 
         if( i >= numVertices || j >=numVertices ||matriz[i][j]==0){
             System.out.println("Essa aresta não existe\n");
-            System.out.println("\nDe enter para continuar");
-            new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
         }
         else{
             matriz[i][j] = 0;
             matriz[j][i] = 0;
+            System.out.println("Aresta removida!\n");
         }
         
     }

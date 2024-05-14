@@ -382,16 +382,16 @@ public class GrafoListaAdj {
         }
     }
 
-    public boolean isGrafoConexoNaoDirecionado() {
 
+
+
+    //GRAFO DIRECIONADO
+    public boolean isGrafoConexoNaoDirecionado() {
         if (numVertices <= 0) {
             return false;
         }
-    
         boolean[] visitados = new boolean[numVertices + 1];
-    
         bfs(1, visitados);
-    
         for (int i = 1; i <= numVertices; i++) {
             if (!visitados[i]) {
                 return false; 
@@ -401,11 +401,8 @@ public class GrafoListaAdj {
     }
     
     private void bfs(int vertice, boolean[] visitados) {
-
         Queue<Integer> fila = new LinkedList<>();
-
         fila.add(vertice);
-
         visitados[vertice] = true;
 
         while (!fila.isEmpty()) {
@@ -419,16 +416,14 @@ public class GrafoListaAdj {
         }
     }
 
-    public boolean isGrafoConexoDirecionado() {
 
+    //Direcionado
+    public boolean isGrafoConexoDirecionado() {
         if (numVertices <= 0) {
             return false;
         }
-    
         boolean[] visitados = new boolean[numVertices + 1];
-    
         dfs(1, visitados);
-    
         for (int i = 1; i <= numVertices; i++) {
             if (!visitados[i]) {
                 return false; 
@@ -446,19 +441,17 @@ public class GrafoListaAdj {
         }
     }
 
+
+
+    //CAMINHO MINIMO 
     public List<Integer> dijkstra(int origem, int destino) {
-
         Map<Integer, Integer> custos = new HashMap<>();
-        
         Map<Integer, Integer> predecessores = new HashMap<>();
-
         PriorityQueue<int[]> filaPrioridade = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
-
         for (int i = 1; i <= numVertices; i++) {
             custos.put(i, Integer.MAX_VALUE);
         }
         custos.put(origem, 0);
-
         filaPrioridade.add(new int[]{origem, 0});
 
         while (!filaPrioridade.isEmpty()) {
@@ -480,7 +473,7 @@ public class GrafoListaAdj {
                 }
             }
         }
-
+        
         List<Integer> caminho = new ArrayList<>();
         int vertice = destino;
         while (predecessores.containsKey(vertice)) {

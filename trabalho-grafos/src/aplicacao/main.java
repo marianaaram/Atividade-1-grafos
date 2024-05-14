@@ -61,11 +61,16 @@ public class main {
               case 2:
                 LimparTela.limpar_console();
                 System.out.println("Digite os vertices que deseja remover a aresta"); 
+                System.out.println("Vértice 1:"); 
                 int remove1 = scanner.nextInt();
+                System.out.println("\nVértice 2:"); 
                 int remove2 = scanner.nextInt();
 
                 grafoMatrizAdj.removeAresta(remove1, remove2);
                 grafoListaAdj.removeAresta(remove1, remove2);
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
                
                 break;
 
@@ -192,9 +197,9 @@ public class main {
                 LimparTela.limpar_console();
 
                 if(grafoListaAdj.isGrafoConexoNaoDirecionado()){
-                  System.out.println("O grafo é conexo.");
+                  System.out.println("Esse grafo é conexo.");
                 } else {
-                  System.out.println("O grafo não é conexo.");
+                  System.out.println("Esse grafo não é conexo.");
                 }
 
                 System.out.println("\nDe enter para continuar");
@@ -213,9 +218,9 @@ public class main {
                 List<Integer> caminhoMinimo = grafoListaAdj.dijkstra(origem, destino);
 
                 if (!caminhoMinimo.isEmpty()) {
-                    System.out.println("Caminho mínimo entre " + origem + " e " + destino + ": " + caminhoMinimo);
+                    System.out.println("\nO caminho mínimo entre " + origem + " e " + destino + " é : " + caminhoMinimo);
                 } else {
-                    System.out.println("Não há caminho mínimo entre os vértices " + origem + " e " + destino + ".");
+                    System.out.println("\nNão há caminho mínimo entre os vértices " + origem + " e " + destino + ".");
                 }
 
                 System.out.println("\nDe enter para continuar");
@@ -265,11 +270,16 @@ public class main {
               case 2:
                 LimparTela.limpar_console();
                 System.out.println("Digite os vertices que deseja remover a aresta"); 
+                System.out.println("Vértice de entrada:"); 
                 int remove1 = scanner.nextInt();
+                System.out.println("\nVértice de saída:"); 
                 int remove2 = scanner.nextInt();
 
                 grafoMatrizAdj.removeAresta(remove1, remove2);
                 grafoListaAdj.removeAresta(remove1, remove2);
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
                 
                 break;
 
@@ -404,9 +414,9 @@ public class main {
                 LimparTela.limpar_console();
 
                 if(grafoListaAdj.isGrafoConexoDirecionado()){
-                  System.out.println("° O grafo é conexo.");
+                  System.out.println("Esse grafo é conexo.");
                 } else {
-                  System.out.println("° O grafo não é conexo.");
+                  System.out.println("Esse grafo não é conexo.");
                 }
 
                 System.out.println("\nDe enter para continuar");
@@ -426,9 +436,9 @@ public class main {
                 List<Integer> caminhoMinimo = grafoListaAdj.dijkstra(origem_dir, destino_dir);
 
                 if (!caminhoMinimo.isEmpty()) {
-                    System.out.println("Caminho mínimo entre " + origem_dir + " e " + destino_dir + ": " + caminhoMinimo);
+                    System.out.println("\nO caminho mínimo entre " + origem_dir + " e " + destino_dir + " é : " + caminhoMinimo);
                 } else {
-                    System.out.println("Não há caminho mínimo entre os vértices " + origem_dir + " e " + destino_dir + ".");
+                    System.out.println("\nNão há caminho mínimo entre os vértices " + origem_dir + " e " + destino_dir + ".");
                 }
 
                 System.out.println("\nDe enter para continuar");
