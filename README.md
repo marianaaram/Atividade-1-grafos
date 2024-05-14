@@ -32,5 +32,5 @@ Desenvolver um aplicativo para a manipulação de grafos.
 - Busca em profundidade. ✅
 - Ordenação Topológica (grafos direcionados acíclicos).
 - AGM (Prim ou Kruskal) (grafos não direcionados).
-- Testar se o grafo é conexo.
-- Identificar o caminho mínimo entre dois vértices.
+- Testar se o grafo é conexo. ✅
+- Identificar o caminho mínimo entre dois vértices. ✅
