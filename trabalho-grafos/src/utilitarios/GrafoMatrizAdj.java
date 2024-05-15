@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import utilitarios.GrafoMatrizAdj.Aresta;
-
 public class GrafoMatrizAdj {
     private int matriz[][];
     private int numVertices;
