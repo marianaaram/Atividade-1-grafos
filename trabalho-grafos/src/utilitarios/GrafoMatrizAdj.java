@@ -1,7 +1,12 @@
 package utilitarios;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 public class GrafoMatrizAdj {
     private int matriz[][];
@@ -46,6 +51,36 @@ public class GrafoMatrizAdj {
             return;
         } else {
             matriz[origem][destino] ++;
+            System.out.println("Aresta criada com sucesso");
+        }
+    }
+
+    public void addArestaPonderada(int i, int j, int peso) {
+        // Desconsiderar a linha e coluna 0
+        i--;
+        j--;
+
+        if (i < 0 || j < 0 || i >= numVertices || j >= numVertices) {
+            System.out.println("Vértices inválidos");
+            return;
+        } else {
+            matriz[i][j] = peso;
+            matriz[j][i] = peso;
+            System.out.println("Aresta criada com sucesso");
+        }
+    }
+
+    // Adiciona aresta direcionada ponderada
+    public void addArestaDirPonderada(int origem, int destino, int peso) {
+        // Desconsiderar a linha e coluna 0
+        origem--;
+        destino--;
+
+        if (origem < 0 || destino < 0 || origem >= numVertices || destino >= numVertices) {
+            System.out.println("Vértices inválidos");
+            return;
+        } else {
+            matriz[origem][destino] = peso;
             System.out.println("Aresta criada com sucesso");
         }
     }
@@ -99,5 +134,229 @@ public class GrafoMatrizAdj {
     }
     return predecessores;
 }
-    
+    public int getPesoAresta(int i, int j) {
+        return matriz[i][j];
+    }
+
+    public int grauVertice(int vertice) {
+        if (vertice <= 0 || vertice > numVertices) {
+            return 0; // Retorna 0 se o vértice não existir
+        }
+        int grau = 0;
+        for (int j = 0; j < numVertices; j++) {
+            grau += matriz[vertice - 1][j];
+        }
+        return grau; // Grau é o número de arestas incidentes
+    }
+
+    public List<Integer> dijkstra(int origem, int destino) {
+        Map<Integer, Integer> custos = new HashMap<>();
+        Map<Integer, Integer> predecessores = new HashMap<>();
+        PriorityQueue<int[]> filaPrioridade = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+
+        for (int i = 1; i <= numVertices; i++) {
+            custos.put(i, Integer.MAX_VALUE);
+        }
+        custos.put(origem, 0);
+        filaPrioridade.add(new int[]{origem, 0});
+
+        while (!filaPrioridade.isEmpty()) {
+            int[] verticeAtual = filaPrioridade.poll();
+            int vertice = verticeAtual[0];
+            int custoAtual = verticeAtual[1];
+
+            if (custoAtual > custos.get(vertice)) {
+                continue;
+            }
+
+            for (int vizinho = 1; vizinho <= numVertices; vizinho++) {
+                if (matriz[vertice - 1][vizinho - 1] > 0) { // Verifica se há uma aresta entre os vértices
+                    int novoCusto = custoAtual + matriz[vertice - 1][vizinho - 1];
+                    if (novoCusto < custos.get(vizinho)) {
+                        custos.put(vizinho, novoCusto);
+                        predecessores.put(vizinho, vertice);
+                        filaPrioridade.add(new int[]{vizinho, novoCusto});
+                    }
+                }
+            }
+        }
+
+        List<Integer> caminho = new ArrayList<>();
+        int vertice = destino;
+        while (predecessores.containsKey(vertice)) {
+            caminho.add(0, vertice);
+            vertice = predecessores.get(vertice);
+        }
+        if (vertice == origem) {
+            caminho.add(0, vertice);
+            return caminho;
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<Integer> dijkstraPonderado(int origem, int destino) {
+        Map<Integer, Integer> custos = new HashMap<>();
+        Map<Integer, Integer> predecessores = new HashMap<>();
+        PriorityQueue<int[]> filaPrioridade = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+
+        for (int i = 0; i < numVertices; i++) {
+            custos.put(i, Integer.MAX_VALUE);
+        }
+        custos.put(origem, 0);
+        filaPrioridade.add(new int[]{origem, 0});
+
+        while (!filaPrioridade.isEmpty()) {
+            int[] verticeAtual = filaPrioridade.poll();
+            int vertice = verticeAtual[0];
+            int custoAtual = verticeAtual[1];
+
+            if (custoAtual > custos.get(vertice)) {
+                continue;
+            }
+
+            for (int vizinho = 0; vizinho < numVertices; vizinho++) {
+                if (matriz[vertice][vizinho] > 0) { // Verifica se há uma aresta entre os vértices
+                    int novoCusto = custoAtual + matriz[vertice][vizinho];
+                    if (novoCusto < custos.get(vizinho)) {
+                        custos.put(vizinho, novoCusto);
+                        predecessores.put(vizinho, vertice);
+                        filaPrioridade.add(new int[]{vizinho, novoCusto});
+                    }
+                }
+            }
+        }
+
+        List<Integer> caminho = new ArrayList<>();
+        int vertice = destino;
+        while (predecessores.containsKey(vertice)) {
+            caminho.add(0, vertice);
+            vertice = predecessores.get(vertice);
+        }
+        if (vertice == origem) {
+            caminho.add(0, vertice);
+            return caminho;
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public Resultado kruskal() {
+        List<Aresta> arestas = new ArrayList<>();
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = i + 1; j < numVertices; j++) {
+                if (matriz[i][j] > 0) {
+                    arestas.add(new Aresta(i, j, matriz[i][j]));
+                }
+            }
+        }
+
+        Collections.sort(arestas, Comparator.comparingInt(a -> a.peso));
+
+        Conjunto[] conjuntos = new Conjunto[numVertices];
+        for (int i = 0; i < numVertices; i++) {
+            conjuntos[i] = new Conjunto(i, 0);
+        }
+
+        List<Aresta> arvoreGeradoraMinima = new ArrayList<>();
+        int pesoTotal = 0;
+
+        for (Aresta aresta : arestas) {
+            int raizOrigem = encontrar(conjuntos, aresta.origem);
+            int raizDestino = encontrar(conjuntos, aresta.destino);
+
+            if (raizOrigem != raizDestino) {
+                arvoreGeradoraMinima.add(aresta);
+                pesoTotal += aresta.peso;
+                unir(conjuntos, raizOrigem, raizDestino);
+            }
+        }
+
+        return new Resultado(arvoreGeradoraMinima, pesoTotal);
+    }
+
+    static class Aresta {
+        int origem, destino, peso;
+
+        public Aresta(int origem, int destino, int peso) {
+            this.origem = origem;
+            this.destino = destino;
+            this.peso = peso;
+        }
+    }
+
+    static class Conjunto {
+        int pai, rank;
+
+        public Conjunto(int pai, int rank) {
+            this.pai = pai;
+            this.rank = rank;
+        }
+    }
+
+    static int encontrar(Conjunto[] conjuntos, int i) {
+        if (conjuntos[i].pai != i) {
+            conjuntos[i].pai = encontrar(conjuntos, conjuntos[i].pai);
+        }
+        return conjuntos[i].pai;
+    }
+
+    static void unir(Conjunto[] conjuntos, int x, int y) {
+        int raizX = encontrar(conjuntos, x);
+        int raizY = encontrar(conjuntos, y);
+
+        if (conjuntos[raizX].rank < conjuntos[raizY].rank) {
+            conjuntos[raizX].pai = raizY;
+        } else if (conjuntos[raizX].rank > conjuntos[raizY].rank) {
+            conjuntos[raizY].pai = raizX;
+        } else {
+            conjuntos[raizY].pai = raizX;
+            conjuntos[raizX].rank++;
+        }
+    }
+
+    static class Resultado {
+        List<Aresta> arvoreGeradoraMinima;
+        int pesoTotal;
+
+        public Resultado(List<Aresta> arvoreGeradoraMinima, int pesoTotal) {
+            this.arvoreGeradoraMinima = arvoreGeradoraMinima;
+            this.pesoTotal = pesoTotal;
+        }
+    }
+
+    public int grauEntrada(int vertice) {
+        if (vertice <= 0 || vertice > numVertices) {
+            return 0; // Retorna 0 se o vértice não existir
+        }
+        int grauEntrada = 0;
+        for (int j = 0; j < numVertices; j++) {
+            grauEntrada += matriz[j][vertice - 1];
+        }
+        return grauEntrada; // Grau de entrada é o número de arestas que chegam ao vértice
+    }
+
+    public int grauSaida(int vertice) {
+        if (vertice <= 0 || vertice > numVertices) {
+            return 0; // Retorna 0 se o vértice não existir
+        }
+        int grauSaida = 0;
+        for (int j = 0; j < numVertices; j++) {
+            if (matriz[vertice - 1][j] > 0) {
+                grauSaida++; // Incrementa o grau de saída para cada aresta saindo do vértice
+            }
+        }
+        return grauSaida;
+    }
+
+    public boolean isGrafoRegularDirecionadoPonderado() {
+        int grauSaidaReferencia = grauSaida(1); // Obtemos o grau de saída do primeiro vértice como referência
+        int grauEntradaReferencia = grauEntrada(1); // Obtemos o grau de entrada do primeiro vértice como referência
+        for (int vertice = 2; vertice <= numVertices; vertice++) {
+            if (grauSaida(vertice) != grauSaidaReferencia || grauEntrada(vertice) != grauEntradaReferencia) {
+                return false; // Se algum vértice tem um grau de saída ou de entrada diferente, o grafo não é regular
+            }
+        }
+        return true; 
+    }
 }
