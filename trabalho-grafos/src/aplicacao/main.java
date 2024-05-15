@@ -797,7 +797,7 @@ public class main {
                 LimparTela.limpar_console();
 
                 //Simples
-                if (grafoListaAdj.isGrafoSimples()) {
+                if (grafoPonderadoListaAdj.isGrafoSimples()) {
                   System.out.println("O grafo é simples, ele não possui laços.");
                 } else {
                   System.out.println("O grafo não é simples.");
@@ -813,20 +813,20 @@ public class main {
                 }
 
                 //Completo
-                if(grafoListaAdj.isGrafoSimples() == false){
+                if(grafoPonderadoListaAdj.isGrafoSimples() == false){
                 System.out.println("O grafo não é completo pois não é simples");
                 }
-                if(grafoListaAdj.isGrafoSimples()){
-                  if(grafoListaAdj.isGrafoCompletoDirecionado()){
+                if(grafoPonderadoListaAdj.isGrafoSimples()){
+                  if(grafoPonderadoListaAdj.isGrafoCompletoDirecionado()){
                     System.out.println("O grafo é completo, todos os vertices conectam com todos os outros.");
                   } 
-                  else if (grafoListaAdj.isGrafoCompletoDirecionado() == false) {
+                  else if (grafoPonderadoListaAdj.isGrafoCompletoDirecionado() == false) {
                     System.out.println("O grafo não é completo pois nem todos os vértices se conectam");
                   }
                 }
 
                 //Bipartido
-                if(grafoListaAdj.isGrafoBipartidoDirecionado()){
+                if(grafoPonderadoListaAdj.isGrafoBipartidoDirecionado()){
                   System.out.println("O grafo é bipartido.");
                 }
                 else{
@@ -890,7 +890,7 @@ public class main {
               case 10:
                 LimparTela.limpar_console();
 
-                List<Integer> ordemTopologica = grafoListaAdj.ordenacaoTopologica();
+                List<Integer> ordemTopologica = grafoPonderadoListaAdj.ordenacaoTopologica();
                 System.out.println("Ordem topológica:");
                 for (int vertice : ordemTopologica) {
                     System.out.print(vertice + " ");
@@ -903,7 +903,7 @@ public class main {
               case 11:
                 LimparTela.limpar_console();
 
-                if(grafoListaAdj.isGrafoConexoDirecionado()){
+                if(grafoPonderadoListaAdj.isGrafoConexoDirecionado()){
                   System.out.println("Esse grafo é conexo.");
                 } else {
                   System.out.println("Esse grafo não é conexo.");

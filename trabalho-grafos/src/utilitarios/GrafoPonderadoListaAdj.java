@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class GrafoPonderadoListaAdj {
 
@@ -65,6 +66,153 @@ public class GrafoPonderadoListaAdj {
             System.out.println();
         }
     }
+
+    public boolean isGrafoConexoDirecionado() {
+        if (adjListMap.isEmpty()) {
+            return false;
+        }
+    
+        boolean[] visitados = new boolean[adjListMap.size() + 1];
+        dfs(1, visitados);
+    
+        // Verifica se todos os vértices foram visitados na DFS
+        for (int i = 1; i <= adjListMap.size(); i++) {
+            if (!visitados[i]) {
+                return false; // Se algum vértice não foi visitado, o grafo não é conexo
+            }
+        }
+        return true;
+    }
+
+    public boolean isGrafoSimples() {
+        for (Map.Entry<Integer, List<Pair<Integer, Integer>>> entry : adjListMap.entrySet()) {
+            int vertice = entry.getKey();
+            List<Pair<Integer, Integer>> vizinhos = entry.getValue();
+            
+            // Verificar se há laços
+            for (Pair<Integer, Integer> vizinho : vizinhos) {
+                if (vizinho.getKey() == vertice) {
+                    return false;
+                }
+            }
+            
+            // Verificar se há múltiplas arestas
+            Map<Integer, Integer> countMap = new HashMap<>();
+            for (Pair<Integer, Integer> vizinho : vizinhos) {
+                countMap.put(vizinho.getKey(), countMap.getOrDefault(vizinho.getKey(), 0) + 1);
+            }
+            for (int count : countMap.values()) {
+                if (count > 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isArestaDirecionada(int origem, int destino) {
+        if (origem <= 0 || destino <= 0 || origem > adjListMap.size() || destino > adjListMap.size()) {
+            return false;
+        }
+        List<Pair<Integer, Integer>> srcList = adjListMap.get(origem);
+        for (Pair<Integer, Integer> aresta : srcList) {
+            if (aresta.getKey() == destino) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean isGrafoCompletoDirecionado() {
+        // Verifica se cada par de vértices distintos possui uma aresta direcionada
+        for (int i = 1; i <= adjListMap.size(); i++) {
+            for (int j = 1; j <= adjListMap.size(); j++) {
+                if (i != j && !isArestaDirecionada(i, j)) {
+                    return false; // Se não houver uma aresta direcionada de i para j, o grafo não é completo
+                }
+            }
+        }
+        return true; 
+    }
+    
+    private void dfs(int vertice, boolean[] visitados) {
+        visitados[vertice] = true;
+        for (Pair<Integer, Integer> vizinho : adjListMap.get(vertice)) {
+            int verticeVizinho = vizinho.getKey();
+            if (!visitados[verticeVizinho]) {
+                dfs(verticeVizinho, visitados);
+            }
+        }
+    }
+
+    public boolean isGrafoBipartidoDirecionado() {
+        // Inicializa o array para armazenar os conjuntos de vértices
+        int[] conjuntos = new int[adjListMap.size() + 1];
+        
+        // Executa a busca em profundidade (DFS) para atribuir os conjuntos aos vértices
+        for (int i = 1; i <= adjListMap.size(); i++) {
+            if (conjuntos[i] == 0 && !dfsBipartidoDirecionado(i, 1, conjuntos)) {
+                return false; // Se um conjunto inválido for encontrado, o grafo não é bipartido
+            }
+        }
+        // Se chegarmos até aqui, o grafo é bipartido
+        return true;
+    }
+    
+    // Função auxiliar para a busca em profundidade (DFS) em um grafo direcionado bipartido
+    private boolean dfsBipartidoDirecionado(int vertice, int conjunto, int[] conjuntos) {
+        // Atribui o conjunto atual ao vértice
+        conjuntos[vertice] = conjunto;
+        
+        // Percorre os vizinhos do vértice
+        for (Pair<Integer, Integer> aresta : adjListMap.get(vertice)) {
+            int vizinho = aresta.getKey();
+            // Se o vizinho já estiver no mesmo conjunto, o grafo não é bipartido
+            if (conjuntos[vizinho] == conjunto) {
+                return false;
+            }
+            // Se o vizinho ainda não tiver conjunto atribuído, chama recursivamente a DFS com o conjunto oposto
+            else if (conjuntos[vizinho] == 0 && !dfsBipartidoDirecionado(vizinho, -conjunto, conjuntos)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public List<Integer> ordenacaoTopologica() {
+    Stack<Integer> ordenacaoTopologica = new Stack<>();
+    boolean[] visitados = new boolean[adjListMap.size() + 1];
+
+    // Percorre todos os vértices do grafo
+    for (int i = 1; i <= adjListMap.size(); i++) {
+        if (!visitados[i]) {
+            dfs(i, visitados, ordenacaoTopologica);
+        }
+    }
+
+    // Converte a pilha em uma lista para retornar a ordem topológica
+    List<Integer> ordem = new ArrayList<>();
+    while (!ordenacaoTopologica.isEmpty()) {
+        ordem.add(ordenacaoTopologica.pop());
+    }
+    return ordem;
+}
+
+// Função de busca em profundidade (DFS) modificada para ordenação topológica
+private void dfs(int vertice, boolean[] visitados, Stack<Integer> ordenacaoTopologica) {
+    visitados[vertice] = true;
+
+    // Itera sobre as arestas do vértice
+    for (Pair<Integer, Integer> aresta : adjListMap.get(vertice)) {
+        int vizinho = aresta.getKey();
+        if (!visitados[vizinho]) {
+            dfs(vizinho, visitados, ordenacaoTopologica);
+        }
+    }
+
+    // Após visitar todos os vizinhos, adiciona o vértice à pilha
+    ordenacaoTopologica.push(vertice);
+}
 
     public List<Integer> getSucessores(int v) {
         List<Integer> sucessores = new ArrayList<>();
