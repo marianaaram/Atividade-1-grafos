@@ -10,12 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 public class GrafoListaAdj {
 
     private static int numVertices;
     public static Map<Integer, List<Integer>> adjListMap;
     private int[] color = new int[1000];
+    private Stack<Integer> pilha;
 
     //Construtor 
     public GrafoListaAdj(int vertices) {
@@ -24,6 +26,7 @@ public class GrafoListaAdj {
         for (int i = 1; i <= vertices ; i++) {
             adjListMap.put(i, new LinkedList<Integer>());
         }
+        this.pilha = new Stack<>();
     }
 
     //Adicionar aresta nao direcionada
@@ -385,7 +388,7 @@ public class GrafoListaAdj {
 
 
 
-    //GRAFO DIRECIONADO
+    //GRAFO CONEXO 
     public boolean isGrafoConexoNaoDirecionado() {
         if (numVertices <= 0) {
             return false;
@@ -443,6 +446,8 @@ public class GrafoListaAdj {
 
 
 
+
+    /// TODO ---------------ERRADO -----------------
     //CAMINHO MINIMO 
     public List<Integer> dijkstra(int origem, int destino) {
         Map<Integer, Integer> custos = new HashMap<>();
@@ -485,6 +490,96 @@ public class GrafoListaAdj {
             return caminho;
         } else {
             return Collections.emptyList();
+        }
+    }
+
+
+
+
+    //ORDENACAO TOPOLOGICA
+    private void ordenacaoTopologicaUtil(int v, boolean visitado[]) {
+        visitado[v] = true;
+        Integer i;
+
+        for (Integer vizinho : adjListMap.get(v)) {
+            if (!visitado[vizinho])
+                ordenacaoTopologicaUtil(vizinho, visitado);
+        }
+
+        pilha.push(v);
+    }
+    public void ordenacaoTopologica() {
+        boolean visitado[] = new boolean[numVertices];
+
+        for (int i = 0; i < numVertices; i++)
+            if (!visitado[i])
+                ordenacaoTopologicaUtil(i, visitado);
+
+        while (!pilha.empty())
+            System.out.print(pilha.pop() + " ");
+    }     
+    
+    
+
+
+    //ARVORE GERADORA 
+    // Função para encontrar a raiz do conjunto de um elemento i
+    private int find(int parent[], int i) {
+        if (parent[i] == i)
+            return i;
+        return find(parent, parent[i]);
+    }
+
+    // Função que une dois subconjuntos de x e y
+    private void union(int parent[], int x, int y) {
+        int xset = find(parent, x);
+        int yset = find(parent, y);
+        parent[xset] = yset;
+    }
+
+    // Função para encontrar a árvore mínima usando o algoritmo de Kruskal
+    public void kruskalMST() {
+        List<int[]> result = new ArrayList<>(); // Lista para armazenar as arestas da árvore mínima
+        List<int[]> edges = new ArrayList<>(); // Lista para armazenar todas as arestas do grafo
+
+        // Adicionando todas as arestas à lista de arestas
+        for (Map.Entry<Integer, List<Integer>> entry : adjListMap.entrySet()) {
+            int u = entry.getKey();
+            for (int v : entry.getValue()) {
+                edges.add(new int[]{u, v});
+            }
+        }
+
+        // Ordenando todas as arestas em ordem crescente de peso
+        Collections.sort(edges, Comparator.comparingInt(o -> adjListMap.get(o[0]).get(o[1])));
+
+        int parent[] = new int[numVertices + 1];
+
+        // Criando conjuntos disjuntos para cada vértice
+        for (int i = 1; i <= numVertices; i++) {
+            parent[i] = i;
+        }
+
+        // Percorrendo todas as arestas em ordem crescente de peso
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+
+            // Encontrando os pais dos conjuntos que contêm u e v
+            int x = find(parent, u);
+            int y = find(parent, v);
+
+            // Se os pais não são os mesmos, então a aresta não forma ciclo
+            if (x != y) {
+                result.add(edge);
+                union(parent, x, y);
+            }
+        }
+
+        // Imprimindo as arestas da árvore mínima
+        System.out.println("Arestas da Árvore Mínima:");
+        for (int[] edge : result) {
+            System.out.println(edge[0] + " - " + edge[1]);
         }
     }
      

@@ -21,7 +21,7 @@ public class main {
         // Criação de um grafo por Matriz e lista de Adjacência
         GrafoMatrizAdj grafoMatrizAdj = new GrafoMatrizAdj(numVertices);
         GrafoListaAdj grafoListaAdj = new GrafoListaAdj(numVertices);
-        
+ 
 
         //Definição de tipo
         System.out.println("\nDigite 1 para criar um garfo nao direcionado\nDigite 2 para criar um garfo direcionado");
@@ -190,6 +190,8 @@ public class main {
 
               case 10:
                 LimparTela.limpar_console();
+
+              
 
                 break;
 
@@ -407,6 +409,12 @@ public class main {
 
               case 10:
                 LimparTela.limpar_console();
+
+                grafoListaAdj.ordenacaoTopologica();
+
+                System.out.println("\nDe enter para continuar");
+                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
+
 
                 break;
 
