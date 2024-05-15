@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class GrafoMatrizAdj {
     private int matriz[][];
@@ -359,4 +361,78 @@ public class GrafoMatrizAdj {
         }
         return true; 
     }
+
+    public void bfsPonderada(int vertice1) {
+        // Verifica se o vértice fornecido é válido
+        if (vertice1 < 1 || vertice1 > numVertices) {
+            System.out.println("\nVértice inválido.");
+            return;
+        }
+    
+        // Inicializa um array para controlar os vértices visitados
+        boolean[] visitados = new boolean[numVertices + 1];
+    
+        // Inicializa uma fila para a busca em largura
+        Queue<Integer> fila = new LinkedList<>();
+    
+        // Marca o vértice inicial como visitado e o adiciona à fila
+        visitados[vertice1] = true;
+        fila.add(vertice1);
+    
+        // Enquanto a fila não estiver vazia
+        System.out.print("\nA ordem da busca é: [ ");
+        while (!fila.isEmpty()) {
+            // Remove o vértice da fila e imprime seu valor
+            int verticeAtual = fila.poll();
+            System.out.print(verticeAtual + " ");
+    
+            // Percorre todos os vizinhos do vértice atual
+            for (int vizinho = 1; vizinho <= numVertices; vizinho++) {
+                // Se houver uma aresta entre o vértice atual e o vizinho
+                if (matriz[verticeAtual - 1][vizinho - 1] > 0) {
+                    // Se o vizinho não foi visitado, marca-o como visitado e o adiciona à fila
+                    if (!visitados[vizinho]) {
+                        visitados[vizinho] = true;
+                        fila.add(vizinho);
+                    }
+                }
+            }
+        }
+        System.out.print("]");
+    }
+    
+    public void dfsPonderada(int vertice1) {
+        // Verifica se o vértice fornecido é válido
+        if (vertice1 < 1 || vertice1 > numVertices) {
+            System.out.println("\nVértice inválido.");
+            return;
+        }
+    
+        // Inicializa um array para controlar os vértices visitados
+        boolean[] visitados = new boolean[numVertices + 1];
+    
+        // Chama o método auxiliar para realizar a DFS a partir do vértice fornecido
+        System.out.print("\nA ordem da busca é: [ ");
+        dfsUtilPonderada(vertice1, visitados);
+        System.out.print("]");
+    }
+    
+    private void dfsUtilPonderada(int vertice, boolean[] visitados) {
+        // Marca o vértice atual como visitado e imprime
+        visitados[vertice] = true;
+        System.out.print(vertice + " ");
+    
+        // Itera sobre todos os vértices
+        for (int vizinho = 1; vizinho <= numVertices; vizinho++) {
+            // Se houver uma aresta entre o vértice atual e o vizinho
+            if (matriz[vertice - 1][vizinho - 1] > 0) {
+                // Se o vizinho não foi visitado, chama recursivamente a função para ele
+                if (!visitados[vizinho]) {
+                    dfsUtilPonderada(vizinho, visitados);
+                }
+            }
+        }
+    }
+    
+    
 }

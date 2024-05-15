@@ -398,7 +398,7 @@ public class main {
                 System.out.println("\nQual dos vértice será o ponto de partida da busca em largura?");
                 int vertice_inicial_1 = scanner.nextInt();
 
-                grafoListaAdj.bfs(vertice_inicial_1);
+                grafoMatrizAdj.bfsPonderada(vertice_inicial_1);
           
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
@@ -412,7 +412,7 @@ public class main {
                 System.out.println("\nQual dos vértice será o ponto de partida da busca em profundidade?");
                 int vertice_inicial_2 = scanner.nextInt();
 
-                grafoListaAdj.dfs(vertice_inicial_2);
+                grafoMatrizAdj.dfsPonderada(vertice_inicial_2);
           
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
@@ -653,14 +653,14 @@ public class main {
                 break;
 
               case 10:
-                LimparTela.limpar_console();
-
-                grafoListaAdj.ordenacaoTopologica();
-
-                System.out.println("\nDe enter para continuar");
-                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
-
-
+                List<Integer> ordemTopologica = grafoListaAdj.ordenacaoTopologica();
+                System.out.println("Ordem topológica:");
+                for (int vertice : ordemTopologica) {
+                    System.out.print(vertice + " ");
+                }
+                System.out.println(); // Adiciona uma quebra de linha após imprimir todos os vértices
+                System.out.println("\nPressione Enter para continuar");
+                new java.util.Scanner(System.in).nextLine();
                 break;
 
               case 11:
@@ -855,7 +855,7 @@ public class main {
                 System.out.println("\nQual dos vértice será o ponto de partida da busca em largura?");
                 int vertice1 = scanner.nextInt();
                 
-                grafoListaAdj.bfs(vertice1);
+                grafoMatrizAdj.bfsPonderada(vertice1);
           
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
@@ -869,7 +869,7 @@ public class main {
                 System.out.println("\nQual dos vértice será o ponto de partida da busca em profundidade?");
                 int vertice_inicial_2 = scanner.nextInt();
 
-                grafoListaAdj.dfs(vertice_inicial_2);
+                grafoMatrizAdj.dfsPonderada(vertice_inicial_2);
           
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
@@ -880,12 +880,14 @@ public class main {
               case 10:
                 LimparTela.limpar_console();
 
-                grafoListaAdj.ordenacaoTopologica();
-
-                System.out.println("\nDe enter para continuar");
-                new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
-
-
+                List<Integer> ordemTopologica = grafoListaAdj.ordenacaoTopologica();
+                System.out.println("Ordem topológica:");
+                for (int vertice : ordemTopologica) {
+                    System.out.print(vertice + " ");
+                }
+                System.out.println(); // Adiciona uma quebra de linha após imprimir todos os vértices
+                System.out.println("\nPressione Enter para continuar");
+                new java.util.Scanner(System.in).nextLine();
                 break;
 
               case 11:
