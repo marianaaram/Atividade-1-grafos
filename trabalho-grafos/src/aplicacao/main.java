@@ -758,7 +758,7 @@ public class main {
                 int remove2 = scanner.nextInt();
 
                 grafoMatrizAdj.removeAresta(remove1, remove2);
-                grafoListaAdj.removeAresta(remove1, remove2);
+                grafoPonderadoListaAdj.removeAresta(remove1, remove2);
 
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
@@ -770,8 +770,8 @@ public class main {
                 System.out.println("Digite o vértice desejado"); 
                 int verticeSP = scanner.nextInt();
 
-                System.out.println("\nOs sucessores do do vértice "+verticeSP+" são: "+ grafoListaAdj.getSucessores(verticeSP));
-                System.out.println("Os predecessores do do vértice "+verticeSP+" são: "+ grafoListaAdj.getPredecessores(verticeSP));
+                System.out.println("\nOs sucessores do do vértice "+verticeSP+" são: "+ grafoPonderadoListaAdj.getSucessores(verticeSP));
+                System.out.println("Os predecessores do do vértice "+verticeSP+" são: "+ grafoPonderadoListaAdj.getPredecessores(verticeSP));
 
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
@@ -851,7 +851,7 @@ public class main {
 
                 LimparTela.limpar_console();
 
-                grafoListaAdj.imprimirLista();
+                grafoPonderadoListaAdj.imprimirLista();
 
                 System.out.println("\nDe enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter

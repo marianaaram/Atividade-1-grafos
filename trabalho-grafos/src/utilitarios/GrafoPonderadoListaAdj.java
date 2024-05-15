@@ -28,6 +28,68 @@ public class GrafoPonderadoListaAdj {
         srcList.add(new Pair<>(destino, peso));
     }
 
+    public void removeAresta(int i, int j) {
+        if (i <= 0 || j <= 0 || i > adjListMap.size() || j > adjListMap.size()) {
+            return;
+        }
+    
+        List<Pair<Integer, Integer>> srcList = adjListMap.get(i);
+        if (srcList != null) {
+            for (Pair<Integer, Integer> pair : srcList) {
+                if (pair.getKey() == j) {
+                    srcList.remove(pair); // Remove o par (vértice, peso) da lista de adjacência do vértice i
+                    break;
+                }
+            }
+        }
+    
+        List<Pair<Integer, Integer>> destList = adjListMap.get(j);
+        if (destList != null) {
+            for (Pair<Integer, Integer> pair : destList) {
+                if (pair.getKey() == i) {
+                    destList.remove(pair); // Remove o par (vértice, peso) da lista de adjacência do vértice j
+                    break;
+                }
+            }
+        }
+    }
+
+    public void imprimirLista() {
+        for (Map.Entry<Integer, List<Pair<Integer, Integer>>> entry : adjListMap.entrySet()) {
+            int vertice = entry.getKey();
+            List<Pair<Integer, Integer>> vizinhos = entry.getValue();
+            System.out.print("Vértice " + vertice + " está conectado a: ");
+            for (Pair<Integer, Integer> vizinho : vizinhos) {
+                System.out.print("(" + vizinho.getKey() + ", peso " + vizinho.getValue() + ") ");
+            }
+            System.out.println();
+        }
+    }
+
+    public List<Integer> getSucessores(int v) {
+        List<Integer> sucessores = new ArrayList<>();
+        for (Pair<Integer, Integer> vizinho : adjListMap.get(v)) {
+            sucessores.add(vizinho.getKey());
+        }
+        return sucessores;
+    }
+
+    // Método para retornar os predecessores de um vértice
+    public List<Integer> getPredecessores(int v) {
+        List<Integer> predecessores = new ArrayList<>();
+        for (Map.Entry<Integer, List<Pair<Integer, Integer>>> entry : adjListMap.entrySet()) {
+            int vertice = entry.getKey();
+            List<Pair<Integer, Integer>> vizinhos = entry.getValue();
+            for (Pair<Integer, Integer> vizinho : vizinhos) {
+                if (vizinho.getKey() == v) {
+                    predecessores.add(vertice);
+                    break; // Parar de procurar depois de encontrar um predecessor
+                }
+            }
+        }
+        return predecessores;
+    }
+
     public boolean isAresta(int origem, int destino) {
         List<Pair<Integer, Integer>> vizinhos = adjListMap.get(origem);
         for (Pair<Integer, Integer> vizinho : vizinhos) {

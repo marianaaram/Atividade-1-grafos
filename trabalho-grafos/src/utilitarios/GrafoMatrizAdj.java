@@ -104,10 +104,6 @@ public class GrafoMatrizAdj {
         }
         
     }
-    
-    public boolean isAresta(int i, int j) {
-        return matriz[i][j] == 1; 
-    }
 
     // Mostra a representação da matriz 
      public void imprimizrMatriz() {
