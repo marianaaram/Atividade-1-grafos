@@ -484,11 +484,6 @@ public class GrafoListaAdj {
         ordenacaoTopologica.push(vertice);
     }
 
-
-
-
-    /// TODO ---------------ERRADO -----------------
-    //CAMINHO MINIMO 
     public List<Integer> dijkstra(int origem, int destino) {
         Map<Integer, Integer> custos = new HashMap<>();
         Map<Integer, Integer> predecessores = new HashMap<>();
