@@ -5,6 +5,8 @@ import java.util.List;
 
 import utilitarios.GrafoListaAdj;
 import utilitarios.GrafoMatrizAdj;
+import utilitarios.GrafoMatrizAdj.Aresta;
+import utilitarios.GrafoMatrizAdj.Resultado;
 import utilitarios.LimparTela;
 import utilitarios.GrafoPonderadoListaAdj;
 
@@ -431,12 +433,20 @@ public class main {
 
               case 11:
                 LimparTela.limpar_console();
-
-                grafoMatrizAdj.kruskal();
-
-                System.out.println("\nDe enter para continuar");
+            
+                // Executa o algoritmo de Kruskal e armazena o resultado
+                Resultado resultadoKruskal = grafoMatrizAdj.kruskal();
+            
+                // Exibe as informações sobre a árvore geradora mínima encontrada
+                System.out.println("Árvore Geradora Mínima:");
+                for (Aresta aresta : resultadoKruskal.arvoreGeradoraMinima) {
+                    System.out.println("Aresta: " + aresta.origem + " - " + aresta.destino + ", Peso: " + aresta.peso);
+                }
+                System.out.println("Peso Total da Árvore Geradora Mínima: " + resultadoKruskal.pesoTotal);
+            
+                System.out.println("\nPressione enter para continuar");
                 new java.util.Scanner(System.in).nextLine(); //Pausa ate o enter
-
+            
                 break;
 
               case 12:

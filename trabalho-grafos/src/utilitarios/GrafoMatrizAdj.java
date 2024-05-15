@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import utilitarios.GrafoMatrizAdj.Aresta;
+
 public class GrafoMatrizAdj {
     private int matriz[][];
     private int numVertices;
@@ -277,8 +279,10 @@ public class GrafoMatrizAdj {
         return new Resultado(arvoreGeradoraMinima, pesoTotal);
     }
 
-    static class Aresta {
-        int origem, destino, peso;
+    public class Aresta {
+        public int origem;
+        public int destino;
+        public int peso;
 
         public Aresta(int origem, int destino, int peso) {
             this.origem = origem;
@@ -317,9 +321,9 @@ public class GrafoMatrizAdj {
         }
     }
 
-    static class Resultado {
-        List<Aresta> arvoreGeradoraMinima;
-        int pesoTotal;
+    public static class Resultado {
+        public List<Aresta> arvoreGeradoraMinima;
+        public int pesoTotal;
 
         public Resultado(List<Aresta> arvoreGeradoraMinima, int pesoTotal) {
             this.arvoreGeradoraMinima = arvoreGeradoraMinima;
@@ -433,6 +437,5 @@ public class GrafoMatrizAdj {
             }
         }
     }
-    
     
 }
