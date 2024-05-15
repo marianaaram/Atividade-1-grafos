@@ -923,7 +923,7 @@ public class main {
                 System.out.print("Digite o vértice de destino: ");
                 int destino_dir = scanner.nextInt();
 
-                List<Integer> caminhoMinimo = grafoMatrizAdj.dijkstraPonderado(origem_dir, destino_dir);
+                List<Integer> caminhoMinimo = grafoPonderadoListaAdj.dijkstra(origem_dir, destino_dir);
 
                 if (!caminhoMinimo.isEmpty()) {
                     System.out.println("\nO caminho mínimo entre " + origem_dir + " e " + destino_dir + " é : " + caminhoMinimo);

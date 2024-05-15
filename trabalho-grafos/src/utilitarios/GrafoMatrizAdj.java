@@ -195,52 +195,6 @@ public class GrafoMatrizAdj {
         }
     }
 
-    public List<Integer> dijkstraPonderado(int origem, int destino) {
-        Map<Integer, Integer> custos = new HashMap<>();
-        Map<Integer, Integer> predecessores = new HashMap<>();
-        PriorityQueue<int[]> filaPrioridade = new PriorityQueue<>((a, b) -> a[1] - b[1]);
-
-        for (int i = 0; i < numVertices; i++) {
-            custos.put(i, Integer.MAX_VALUE);
-        }
-        custos.put(origem, 0);
-        filaPrioridade.add(new int[]{origem, 0});
-
-        while (!filaPrioridade.isEmpty()) {
-            int[] verticeAtual = filaPrioridade.poll();
-            int vertice = verticeAtual[0];
-            int custoAtual = verticeAtual[1];
-
-            if (custoAtual > custos.get(vertice)) {
-                continue;
-            }
-
-            for (int vizinho = 0; vizinho < numVertices; vizinho++) {
-                if (matriz[vertice][vizinho] > 0) { // Verifica se há uma aresta entre os vértices
-                    int novoCusto = custoAtual + matriz[vertice][vizinho];
-                    if (novoCusto < custos.get(vizinho)) {
-                        custos.put(vizinho, novoCusto);
-                        predecessores.put(vizinho, vertice);
-                        filaPrioridade.add(new int[]{vizinho, novoCusto});
-                    }
-                }
-            }
-        }
-
-        List<Integer> caminho = new ArrayList<>();
-        int vertice = destino;
-        while (predecessores.containsKey(vertice)) {
-            caminho.add(0, vertice);
-            vertice = predecessores.get(vertice);
-        }
-        if (vertice == origem) {
-            caminho.add(0, vertice);
-            return caminho;
-        } else {
-            return Collections.emptyList();
-        }
-    }
-
     public Resultado kruskal() {
         List<Aresta> arestas = new ArrayList<>();
         for (int i = 0; i < numVertices; i++) {

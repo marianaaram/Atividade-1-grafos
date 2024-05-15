@@ -214,6 +214,52 @@ private void dfs(int vertice, boolean[] visitados, Stack<Integer> ordenacaoTopol
     ordenacaoTopologica.push(vertice);
 }
 
+public List<Integer> dijkstra(int origem, int destino) {
+    Map<Integer, Integer> custos = new HashMap<>();
+    Map<Integer, Integer> predecessores = new HashMap<>();
+    PriorityQueue<int[]> filaPrioridade = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+    for (int i = 1; i <= adjListMap.size(); i++) {
+        custos.put(i, Integer.MAX_VALUE);
+    }
+    custos.put(origem, 0);
+    filaPrioridade.add(new int[]{origem, 0});
+
+    while (!filaPrioridade.isEmpty()) {
+        int[] verticeAtual = filaPrioridade.poll();
+        int vertice = verticeAtual[0];
+        int custoAtual = verticeAtual[1];
+
+        if (custoAtual > custos.get(vertice)) {
+            continue;
+        }
+
+        for (Pair<Integer, Integer> aresta : adjListMap.get(vertice)) {
+            int vizinho = aresta.getKey();
+            int pesoAresta = aresta.getValue();
+            int novoCusto = custoAtual + pesoAresta;
+
+            if (novoCusto < custos.get(vizinho)) {
+                custos.put(vizinho, novoCusto);
+                predecessores.put(vizinho, vertice);
+                filaPrioridade.add(new int[]{vizinho, novoCusto});
+            }
+        }
+    }
+    
+    List<Integer> caminho = new ArrayList<>();
+    int vertice = destino;
+    while (predecessores.containsKey(vertice)) {
+        caminho.add(0, vertice);
+        vertice = predecessores.get(vertice);
+    }
+    if (vertice == origem) {
+        caminho.add(0, vertice);
+        return caminho;
+    } else {
+        return Collections.emptyList();
+    }
+}
+
     public List<Integer> getSucessores(int v) {
         List<Integer> sucessores = new ArrayList<>();
         for (Pair<Integer, Integer> vizinho : adjListMap.get(v)) {
