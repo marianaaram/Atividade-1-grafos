@@ -49,6 +49,17 @@ public class GrafoListaAdj {
         srcList.add(destino);
     }
 
+    public void addArestaPonderada(int i, int j, int peso) {
+        if (i > adjListMap.size() || j > adjListMap.size()) {
+            return;
+        }
+        List<Integer> srcList = adjListMap.get(i);
+        srcList.add(j); // Adiciona o vértice j à lista de adjacência do vértice i
+        List<Integer> destList = adjListMap.get(j);
+        destList.add(i); // Se o grafo for não direcionado, adicione o vértice i à lista de adjacência do vértice j
+        // Aqui você pode armazenar o peso da aresta em uma estrutura de dados adequada se precisar utilizá-lo posteriormente
+    }
+
 
     //Remover aresta 
     public void removeAresta(int i, int j) {
@@ -146,10 +157,6 @@ public class GrafoListaAdj {
     }
     return predecessores;
     }
-
-
-
-
     
     //TESTES DO GRAFO
 
@@ -419,7 +426,6 @@ public class GrafoListaAdj {
         }
     }
 
-
     //Direcionado
     public boolean isGrafoConexoDirecionado() {
         if (numVertices <= 0) {
@@ -444,11 +450,40 @@ public class GrafoListaAdj {
         }
     }
 
+    public List<Integer> ordenacaoTopologica() {
+        Stack<Integer> ordenacaoTopologica = new Stack<>();
+        boolean[] visitados = new boolean[numVertices + 1];
 
+        // Percorre todos os vértices do grafo
+        for (int i = 1; i <= numVertices; i++) {
+            if (!visitados[i]) {
+                dfs(i, visitados, ordenacaoTopologica);
+            }
+        }
 
+        // Converte a pilha em uma lista para retornar a ordem topológica
+        List<Integer> ordem = new ArrayList<>();
+        while (!ordenacaoTopologica.isEmpty()) {
+            ordem.add(ordenacaoTopologica.pop());
+        }
+        return ordem;
+    }
 
-    /// TODO ---------------ERRADO -----------------
-    //CAMINHO MINIMO 
+    // Função de busca em profundidade (DFS) modificada para ordenação topológica
+    private void dfs(int vertice, boolean[] visitados, Stack<Integer> ordenacaoTopologica) {
+        visitados[vertice] = true;
+
+        // Itera sobre os vizinhos do vértice
+        for (int vizinho : adjListMap.get(vertice)) {
+            if (!visitados[vizinho]) {
+                dfs(vizinho, visitados, ordenacaoTopologica);
+            }
+        }
+
+        // Após visitar todos os vizinhos, adiciona o vértice à pilha
+        ordenacaoTopologica.push(vertice);
+    }
+
     public List<Integer> dijkstra(int origem, int destino) {
         Map<Integer, Integer> custos = new HashMap<>();
         Map<Integer, Integer> predecessores = new HashMap<>();
@@ -492,95 +527,4 @@ public class GrafoListaAdj {
             return Collections.emptyList();
         }
     }
-
-
-
-
-    //ORDENACAO TOPOLOGICA
-    private void ordenacaoTopologicaUtil(int v, boolean visitado[]) {
-        visitado[v] = true;
-        Integer i;
-
-        for (Integer vizinho : adjListMap.get(v)) {
-            if (!visitado[vizinho])
-                ordenacaoTopologicaUtil(vizinho, visitado);
-        }
-
-        pilha.push(v);
-    }
-    public void ordenacaoTopologica() {
-        boolean visitado[] = new boolean[numVertices];
-
-        for (int i = 0; i < numVertices; i++)
-            if (!visitado[i])
-                ordenacaoTopologicaUtil(i, visitado);
-
-        while (!pilha.empty())
-            System.out.print(pilha.pop() + " ");
-    }     
-    
-    
-
-
-    //ARVORE GERADORA 
-    // Função para encontrar a raiz do conjunto de um elemento i
-    private int find(int parent[], int i) {
-        if (parent[i] == i)
-            return i;
-        return find(parent, parent[i]);
-    }
-
-    // Função que une dois subconjuntos de x e y
-    private void union(int parent[], int x, int y) {
-        int xset = find(parent, x);
-        int yset = find(parent, y);
-        parent[xset] = yset;
-    }
-
-    // Função para encontrar a árvore mínima usando o algoritmo de Kruskal
-    public void kruskalMST() {
-        List<int[]> result = new ArrayList<>(); // Lista para armazenar as arestas da árvore mínima
-        List<int[]> edges = new ArrayList<>(); // Lista para armazenar todas as arestas do grafo
-
-        // Adicionando todas as arestas à lista de arestas
-        for (Map.Entry<Integer, List<Integer>> entry : adjListMap.entrySet()) {
-            int u = entry.getKey();
-            for (int v : entry.getValue()) {
-                edges.add(new int[]{u, v});
-            }
-        }
-
-        // Ordenando todas as arestas em ordem crescente de peso
-        Collections.sort(edges, Comparator.comparingInt(o -> adjListMap.get(o[0]).get(o[1])));
-
-        int parent[] = new int[numVertices + 1];
-
-        // Criando conjuntos disjuntos para cada vértice
-        for (int i = 1; i <= numVertices; i++) {
-            parent[i] = i;
-        }
-
-        // Percorrendo todas as arestas em ordem crescente de peso
-        for (int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
-
-            // Encontrando os pais dos conjuntos que contêm u e v
-            int x = find(parent, u);
-            int y = find(parent, v);
-
-            // Se os pais não são os mesmos, então a aresta não forma ciclo
-            if (x != y) {
-                result.add(edge);
-                union(parent, x, y);
-            }
-        }
-
-        // Imprimindo as arestas da árvore mínima
-        System.out.println("Arestas da Árvore Mínima:");
-        for (int[] edge : result) {
-            System.out.println(edge[0] + " - " + edge[1]);
-        }
-    }
-     
 }
