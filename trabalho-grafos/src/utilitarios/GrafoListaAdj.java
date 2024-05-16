@@ -186,7 +186,7 @@ public class GrafoListaAdj {
     //Grafo é regular
     public boolean isGrafoRegular() {
         int grauReferencia;
-         grauReferencia = grauVertice(0); // Obtemos o grau do primeiro vértice como referência
+         grauReferencia = grauVertice(1); // Obtemos o grau do primeiro vértice como referência
         for (int vertice = 1; vertice <= numVertices; vertice++) {
             if (grauVertice(vertice) != grauVertice(grauReferencia)) {
                 return false; // Se algum vértice tem um grau diferente, o grafo não é regular

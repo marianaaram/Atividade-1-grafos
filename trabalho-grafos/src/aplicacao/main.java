@@ -107,7 +107,7 @@ public class main {
 
               case 5:
                 LimparTela.limpar_console();
-                int grauReferencia = grafoListaAdj.grauVertice(0); // Usamos o primeiro vértice como referência
+                int grauReferencia = grafoListaAdj.grauVertice(1); // Usamos o primeiro vértice como referência
 
                 //simples
                 if (grafoListaAdj.isGrafoSimples()) {
