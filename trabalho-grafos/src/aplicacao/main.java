@@ -663,6 +663,8 @@ public class main {
                 break;
 
               case 10:
+                LimparTela.limpar_console();
+
                 List<Integer> ordemTopologica = grafoListaAdj.ordenacaoTopologica();
                 System.out.println("Ordem topológica:");
                 for (int vertice : ordemTopologica) {
